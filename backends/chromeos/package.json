@@ -1,0 +1,37 @@
+{
+  "name": "chromeos-webdriver-server",
+  "description": "A WebDriver server that pushes URLs to ChromeOS devices, built on generic-webdriver-server.",
+  "version": "1.0.0",
+  "homepage": "https://github.com/google/generic-webdriver-server",
+  "author": "Google",
+  "license": "Apache-2.0",
+  "maintainers": [
+    {
+      "name": "Joey Parrish",
+      "email": "joeyparrish@google.com"
+    }
+  ],
+  "keywords": [
+    "chromebook",
+    "chromeos",
+    "karma",
+    "selenium",
+    "webdriver"
+  ],
+  "main": "chromeos-webdriver-server.js",
+  "scripts": {
+    "lint": "(cd ../../; npx eslint --ignore-path .gitignore --max-warnings 0 backends/chromeos/)",
+    "checkClean": "[[ -z \"$(git status --short .)\" ]] || (echo \"Git not clean!\"; git status .; exit 1)",
+    "pretest": "npm run lint",
+    "prepack": "npm run lint && npm run checkClean"
+  },
+  "bin": {
+    "chromeos-webdriver-cli": "./chromeos-webdriver-cli.js",
+    "chromeos-webdriver-server": "./chromeos-webdriver-server.js"
+  },
+  "dependencies": {
+    "generic-webdriver": "^1.0.0",
+    "node-fetch": "^2.6.0",
+    "node-ssh": "^10.0.2"
+  }
+}

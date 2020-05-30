@@ -1,0 +1,36 @@
+{
+  "name": "generic-webdriver-server",
+  "description": "A generic WebDriver server base class and a Selenium add-on to invoke it.",
+  "version": "1.0.0",
+  "homepage": "https://github.com/google/generic-webdriver-server",
+  "author": "Google",
+  "license": "Apache-2.0",
+  "maintainers": [
+    {
+      "name": "Joey Parrish",
+      "email": "joeyparrish@google.com"
+    }
+  ],
+  "keywords": [
+    "karma",
+    "selenium",
+    "webdriver"
+  ],
+  "main": "generic-webdriver-server.js",
+  "scripts": {
+    "lint": "eslint --ignore-path .gitignore --max-warnings 0 .",
+    "jar": "ant -f java/build.xml jar && cp java/build/jar/*.jar java/third_party/selenium*.jar ./",
+    "checkClean": "[[ -z \"$(git status --short .)\" ]] || (echo \"Git not clean!\"; git status .; exit 1)",
+    "pretest": "npm run lint",
+    "prepack": "npm run lint && npm run checkClean && npm run jar"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "yargs": "^15.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.4.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-jsdoc": "^30.0.2"
+  }
+}

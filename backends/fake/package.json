@@ -1,0 +1,32 @@
+{
+  "name": "fake-webdriver-server",
+  "description": "A fake WebDriver server that does nothing, built on generic-webdriver-server.",
+  "version": "1.0.0",
+  "homepage": "https://github.com/google/generic-webdriver-server",
+  "author": "Google",
+  "license": "Apache-2.0",
+  "maintainers": [
+    {
+      "name": "Joey Parrish",
+      "email": "joeyparrish@google.com"
+    }
+  ],
+  "keywords": [
+    "karma",
+    "selenium",
+    "webdriver"
+  ],
+  "main": "fake-webdriver-server.js",
+  "scripts": {
+    "lint": "(cd ../../; npx eslint --ignore-path .gitignore --max-warnings 0 backends/fake/)",
+    "checkClean": "[[ -z \"$(git status --short .)\" ]] || (echo \"Git not clean!\"; git status .; exit 1)",
+    "pretest": "npm run lint",
+    "prepack": "npm run lint && npm run checkClean"
+  },
+  "bin": {
+    "fake-webdriver-server": "./fake-webdriver-server.js"
+  },
+  "dependencies": {
+    "generic-webdriver": "^1.0.0"
+  }
+}

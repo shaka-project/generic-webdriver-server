@@ -1,0 +1,4 @@
+These third-party JARs were sourced from Selenium:
+ - https://github.com/SeleniumHQ/selenium/tree/selenium-3.141.59/third_party/java/auto
+ - https://github.com/SeleniumHQ/selenium/tree/selenium-3.141.59/third_party/java/service
+ - https://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar

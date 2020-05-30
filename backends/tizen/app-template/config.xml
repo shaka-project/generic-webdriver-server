@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns:tizen="http://tizen.org/ns/widgets" xmlns="http://www.w3.org/ns/widgets" id="http://google.com/genWebDriv/Container" version="1.0.0" viewmodes="maximized">
+    <!-- NOTE: It turns out that Tizen package names must be EXACTLY 10
+               characters, or the device will reject the app. -->
+    <tizen:application id="genWebDriv.Container" package="genWebDriv" required_version="2.3"/>
+    <content src="index.html"/>
+    <feature name="http://tizen.org/feature/screen.size.normal.1080.1920"/>
+    <icon src="icon.png"/>
+    <tizen:metadata key="http://samsung.com/tv/metadata/prelaunch.support" value="true"/>
+    <name>genWebDrivContainer</name>
+    <tizen:profile name="tv-samsung"/>
+
+    <!-- Access to the internet -->
+    <tizen:privilege name="http://tizen.org/privilege/internet"/>
+
+    <!-- Settings for the test launcher.
+         The "encryption" setting is for the encryption of application resources
+         such as our index.html file.  This is not related to EME. -->
+    <tizen:setting
+      screen-orientation="landscape"
+      context-menu="enable"
+      background-support="disable"
+      encryption="disable"
+      install-location="auto"
+      hwkey-event="enable"/>
+
+    <!-- Allow the application to access any web resource.
+         This allows us to embed an iframe that points to the destination.
+         Without this, we get tests run in a browser tab instead. -->
+    <access origin="*"/>
+</widget>

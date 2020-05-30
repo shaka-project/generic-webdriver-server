@@ -1,0 +1,35 @@
+{
+  "name": "chromecast-webdriver-server",
+  "description": "A WebDriver server that pushes URLs to Chromecast, built on generic-webdriver-server.",
+  "version": "1.0.0",
+  "homepage": "https://github.com/google/generic-webdriver-server",
+  "author": "Google",
+  "license": "Apache-2.0",
+  "maintainers": [
+    {
+      "name": "Joey Parrish",
+      "email": "joeyparrish@google.com"
+    }
+  ],
+  "keywords": [
+    "chromecast",
+    "karma",
+    "selenium",
+    "webdriver"
+  ],
+  "main": "chromecast-webdriver-server.js",
+  "scripts": {
+    "lint": "(cd ../../; npx eslint --ignore-path .gitignore --max-warnings 0 backends/chromecast/)",
+    "checkClean": "[[ -z \"$(git status --short .)\" ]] || (echo \"Git not clean!\"; git status .; exit 1)",
+    "pretest": "npm run lint",
+    "prepack": "npm run lint && npm run checkClean"
+  },
+  "bin": {
+    "chromecast-webdriver-cli": "./chromecast-webdriver-cli.js",
+    "chromecast-webdriver-server": "./chromecast-webdriver-server.js"
+  },
+  "dependencies": {
+    "castv2": "^0.1.9",
+    "generic-webdriver": "^1.0.0"
+  }
+}
