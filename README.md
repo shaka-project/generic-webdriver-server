@@ -41,12 +41,12 @@ In addition, you'll need JAR files from the package `generic-webdriver-server`.
 
 ## How it works
 
-See [how-it-works.md](how-it-works.md) for details.
+See [how-it-works.md](/how-it-works.md) for details.
 
 
 ## Setup
 
-See [setup.md](setup.md) for details.
+See [setup.md](/setup.md) for details.
 
 
 [Karma]: https://karma-runner.github.io/
