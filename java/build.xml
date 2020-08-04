@@ -24,7 +24,9 @@
   <target name="compile">
     <mkdir dir="build/classes"/>
 
-    <javac srcdir="src" destdir="build/classes" includeantruntime="false">
+    <!-- Build for Java SE 6, which is what Selenium is built for. -->
+    <javac srcdir="src" destdir="build/classes" includeantruntime="false"
+           source="6" target="6">
       <!-- Include all third-party jar files in the build so that we can
            reference those classes in our build. -->
       <classpath>
