@@ -52,12 +52,14 @@ This backend supports the following parameters:
 
 ## How it works
 
-See [how-it-works.md](how-it-works.md) for details.
+See [how-it-works.md](https://github.com/google/generic-webdriver-server/blob/main/backends/tizen/how-it-works.md)
+for details.
 
 
 ## Tunneling to a Tizen device on another network
 
-See [tunneling.md](tunneling.md) for details.
+See [tunneling.md](https://github.com/google/generic-webdriver-server/blob/main/backends/tizen/tunneling.md)
+for details.
 
 
 ## Tizen Studio Docker Images
@@ -66,8 +68,11 @@ We provide public Docker images for Tizen Studio which are used by default.
 Downloading or building these locally will use about 3.2GB of disk space (as of
 July 2020).
 
-To learn more about the Docker images, see [how-it-works.md](how-it-works.md)
-and the [tizen-studio-docker/](tizen-studio-docker/) folder.
+To learn more about the Docker images, see
+[how-it-works.md](https://github.com/google/generic-webdriver-server/blob/main/backends/tizen/how-it-works.md)
+and the
+[tizen-studio-docker/](https://github.com/google/generic-webdriver-server/blob/main/backends/tizen/tizen-studio-docker/)
+folder.
 
 
 ## Using the CLI
@@ -84,5 +89,5 @@ tizen-webdriver-cli --hostname=192.168.1.42 --url=https://www.google.com/
 [Generic WebDriver Server]: https://github.com/google/generic-webdriver-server
 [Karma]: https://karma-runner.github.io/
 [Selenium grid]: https://www.selenium.dev/documentation/en/grid/
-["Setup" doc]: https://github.com/google/generic-webdriver-server/blob/master/setup.md
+["Setup" doc]: https://github.com/google/generic-webdriver-server/blob/main/setup.md
 [WebDriver]: https://www.w3.org/TR/webdriver2/

@@ -73,18 +73,20 @@ See also related notes in the ["Setup" doc][].
 
 ## Device setup
 
-See [device-setup.md](device-setup.md) for details on setting up a ChromeOS
-device in dev mode and enabling SSH access.
+See [device-setup.md](https://github.com/google/generic-webdriver-server/blob/main/backends/chromeos/device-setup.md)
+for details on setting up a ChromeOS device in dev mode and enabling SSH access.
 
 
 ## How it works
 
-See [how-it-works.md](how-it-works.md) for details.
+See [how-it-works.md](https://github.com/google/generic-webdriver-server/blob/main/backends/chromeos/how-it-works.md)
+for details.
 
 
 ## Tunneling to a ChromeOS device on another network
 
-See [tunneling.md](tunneling.md) for details.
+See [tunneling.md](https://github.com/google/generic-webdriver-server/blob/main/backends/chromeos/tunneling.md)
+for details.
 
 
 ## Using the CLI
@@ -101,5 +103,5 @@ chromeos-webdriver-cli --hostname=192.168.1.42 --url=https://www.google.com/
 [Generic WebDriver Server]: https://github.com/google/generic-webdriver-server
 [Karma]: https://karma-runner.github.io/
 [Selenium grid]: https://www.selenium.dev/documentation/en/grid/
-["Setup" doc]: https://github.com/google/generic-webdriver-server/blob/master/setup.md
+["Setup" doc]: https://github.com/google/generic-webdriver-server/blob/main/setup.md
 [WebDriver]: https://www.w3.org/TR/webdriver2/

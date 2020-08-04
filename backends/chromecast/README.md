@@ -38,7 +38,8 @@ This backend supports the following parameters:
  - `hostname`: **(required)** The hostname or IP address of the Chromecast
    device, with optional port number.
  - `receiver-app-id`: The receiver app ID to load, in case you want to host
-   your own copy.  (See also [receiver-deployment.md](receiver-deployment.md))
+   your own copy.  (See also
+   [receiver-deployment.md](https://github.com/google/generic-webdriver-server/blob/main/backends/chromecast/receiver-deployment.md))
  - `idle-timeout-seconds`: The timeout for idle sessions, after which they will
    be closed.
  - `connection-timeout-seconds`: The connection timeout for the Chromecast,
@@ -48,17 +49,20 @@ This backend supports the following parameters:
 ## Chromecast receiver deployment
 
 To learn how to deploy your own copy of the Chromecast Receiver, see
-[receiver-deployment.md](receiver-deployment.md) for details.
+[receiver-deployment.md](https://github.com/google/generic-webdriver-server/blob/main/backends/chromecast/receiver-deployment.md)
+for details.
 
 
 ## How it works
 
-See [how-it-works.md](how-it-works.md) for details.
+See [how-it-works.md](https://github.com/google/generic-webdriver-server/blob/main/backends/chromecast/how-it-works.md)
+for details.
 
 
 ## Tunneling to a Chromecast on another network
 
-See [tunneling.md](tunneling.md) for details.
+See [tunneling.md](https://github.com/google/generic-webdriver-server/blob/main/backends/chromecast/tunneling.md)
+for details.
 
 
 ## Using the CLI
@@ -75,5 +79,5 @@ chromecast-webdriver-cli --hostname=192.168.1.42 --url=https://www.google.com/
 [Generic WebDriver Server]: https://github.com/google/generic-webdriver-server
 [Karma]: https://karma-runner.github.io/
 [Selenium grid]: https://www.selenium.dev/documentation/en/grid/
-["Setup" doc]: https://github.com/google/generic-webdriver-server/blob/master/setup.md
+["Setup" doc]: https://github.com/google/generic-webdriver-server/blob/main/setup.md
 [WebDriver]: https://www.w3.org/TR/webdriver2/

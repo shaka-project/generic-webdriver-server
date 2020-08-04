@@ -91,5 +91,5 @@ See also ["Setting parameters"][] in the ["Setup" doc][] of
 
 
 [Generic WebDriver Server]: https://github.com/google/generic-webdriver-server
-["Setting parameters"]: https://github.com/google/generic-webdriver-server/blob/master/setup.md#setting-parameters
-["Setup" doc]: https://github.com/google/generic-webdriver-server/blob/master/setup.md
+["Setting parameters"]: https://github.com/google/generic-webdriver-server/blob/main/setup.md#setting-parameters
+["Setup" doc]: https://github.com/google/generic-webdriver-server/blob/main/setup.md
