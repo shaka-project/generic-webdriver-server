@@ -30,7 +30,7 @@
     "chromeos-webdriver-server": "./chromeos-webdriver-server.js"
   },
   "dependencies": {
-    "generic-webdriver": "^1.0.0",
+    "generic-webdriver-server": "^1.0.0",
     "node-fetch": "^2.6.0",
     "node-ssh": "^10.0.2"
   }

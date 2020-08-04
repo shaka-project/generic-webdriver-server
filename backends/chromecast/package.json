@@ -30,6 +30,6 @@
   },
   "dependencies": {
     "castv2": "^0.1.9",
-    "generic-webdriver": "^1.0.0"
+    "generic-webdriver-server": "^1.0.0"
   }
 }

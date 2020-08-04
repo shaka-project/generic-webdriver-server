@@ -27,6 +27,6 @@
     "fake-webdriver-server": "./fake-webdriver-server.js"
   },
   "dependencies": {
-    "generic-webdriver": "^1.0.0"
+    "generic-webdriver-server": "^1.0.0"
   }
 }
