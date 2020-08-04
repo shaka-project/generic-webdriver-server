@@ -33,6 +33,8 @@ of the WebDriver protocol necessary for [Karma][].
 
 Out of the box, we provide backends for:
  - Chromecast (NPM package `chromecast-webdriver-server`)
+ - ChromeOS (NPM package `chromeos-webdriver-server`)
+ - Tizen (NPM package `tizen-webdriver-server`)
 
 In addition, you'll need JAR files from the package `generic-webdriver-server`.
 
