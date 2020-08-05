@@ -15,7 +15,9 @@
  */
 
 
+const fs = require('fs');
 const path = require('path');
+const tmp = require('tmp-promise');
 const util = require('util');
 
 const execFile = util.promisify(require('child_process').execFile);
@@ -33,7 +35,7 @@ const dockerImageAppTemplatePath = '/tmp/app-template';
  *   the URL into it.  If null, send the Tizen device back to the home screen.
  * @return {!Promise}
  */
-function loadOnTizen(flags, log, url) {
+async function loadOnTizen(flags, log, url) {
   /**
    * We build a set of commands which will be combined and executed in bash -c.
    * For locally-installed copies of Tizen Studio, these will be executed in
@@ -106,18 +108,47 @@ function loadOnTizen(flags, log, url) {
 
   if (flags.localTizenStudio) {
     // Run the command locally in bash.
-    return execFile('bash', ['-c', command]);
+    await execFile('bash', ['-c', command]);
   } else {
-    // Run the command inside a Docker image.
-    return execFile('docker', [
-      'run',
-      // Mount the app template into the Docker image.
-      '-v', `${hostAppTemplatePath}:${dockerImageAppTemplatePath}:ro`,
-      // The name of the image.
-      flags.tizenStudioDockerImage,
-      // The command is then run inside bash inside the Docker image.
-      'bash', '-c', command,
-    ]);
+    // Docker on macOS will not allow arbitrary paths to be mounted into an
+    // image by default.  Rather than require extra configuration, copy the app
+    // template into a temporary directory first.
+    const tmpDir = await tmp.dir({
+      mode: 0o700,  // Only accessible to the owner
+      prefix: 'tizen-webdriver-server-',
+      unsafeCleanup: true,  // Remove directory contents on cleanup
+
+      // Set the parent directory of our temporary directory.
+      // On macOS, the default for this is not /tmp, but /tmp is what Docker
+      // allows to be mounted without special configuration.  So we need to
+      // override the default here.
+      // TODO: test on Windows
+      tmpdir: '/tmp',
+    });
+
+    try {
+      // Copy the app template into our temp directory.
+      const filenames = fs.readdirSync(hostAppTemplatePath);
+      for (const filename of filenames) {
+        fs.copyFileSync(
+            path.resolve(hostAppTemplatePath, filename),
+            path.resolve(tmpDir.path, filename));
+      }
+
+      // Run the command inside a Docker image.
+      await execFile('docker', [
+        'run',
+        // Mount the app template into the Docker image.
+        '-v', `${tmpDir.path}:${dockerImageAppTemplatePath}:ro`,
+        // The name of the image.
+        flags.tizenStudioDockerImage,
+        // The command is then run inside bash inside the Docker image.
+        'bash', '-c', command,
+      ]);
+    } finally {
+      // Remove our temporary directory.
+      tmpDir.cleanup();
+    }
   }
 }
 
