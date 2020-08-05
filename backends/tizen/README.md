@@ -13,6 +13,14 @@ Part of the [Generic WebDriver Server][] family.
 npm install --save-dev generic-webdriver-server tizen-webdriver-server
 ```
 
+Because Docker images may take significant time to download the first time they
+are used by the server, you may want to pre-fetch the image you'll be using.
+This command will fetch the default image:
+
+```sh
+docker pull gcr.io/generic-webdriver-server/tizen-studio-tv-3.0
+```
+
 
 ## Usage
 
