@@ -1,3 +1,7 @@
+## 1.0.2 (2020-08-10)
+
+Fix failure on Windows caused by macOS fixes in previous release.
+
 ## 1.0.1 (2020-08-05)
 
 Improve docs and fix Docker issues on macOS.
