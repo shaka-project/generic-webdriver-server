@@ -16,6 +16,7 @@
 
 
 const fs = require('fs');
+const os = require('os');
 const path = require('path');
 const tmp = require('tmp-promise');
 const util = require('util');
@@ -113,18 +114,19 @@ async function loadOnTizen(flags, log, url) {
     // Docker on macOS will not allow arbitrary paths to be mounted into an
     // image by default.  Rather than require extra configuration, copy the app
     // template into a temporary directory first.
-    const tmpDir = await tmp.dir({
+    const tmpDirOptions = {
       mode: 0o700,  // Only accessible to the owner
       prefix: 'tizen-webdriver-server-',
       unsafeCleanup: true,  // Remove directory contents on cleanup
-
+    };
+    if (os.type() == 'Darwin') {
       // Set the parent directory of our temporary directory.
       // On macOS, the default for this is not /tmp, but /tmp is what Docker
       // allows to be mounted without special configuration.  So we need to
       // override the default here.
-      // TODO: test on Windows
-      tmpdir: '/tmp',
-    });
+      tmpDirOptions.tmpdir = '/tmp';
+    }
+    const tmpDir = await tmp.dir(tmpDirOptions);
 
     try {
       // Copy the app template into our temp directory.
