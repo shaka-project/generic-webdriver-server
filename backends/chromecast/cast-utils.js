@@ -119,6 +119,9 @@ function cast(flags, log, url) {
         } else if (data.type == 'LAUNCH_ERROR') {
           const message = 'Failed to launch receiver!  Reason: ' + data.reason;
           reject(new Error(message));
+        } else if (data.type == 'RECEIVER_STATUS' && data.status.volume) {
+          // Ignore updates on audio volume.  These occur frequently, are not
+          // useful, and should not be logged below.
         } else {
           // TODO: are there other common errors we need to check for?
           log.debug('Unrecognized data from castv2:', data);
