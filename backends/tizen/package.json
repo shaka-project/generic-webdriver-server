@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "generic-webdriver-server": "^1.0.0",
-    "tmp-promise": "^3.0.2"
+    "tmp-promise": "^3.0.2",
+    "wol": "^1.0.7"
   }
 }

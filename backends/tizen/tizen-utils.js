@@ -20,6 +20,7 @@ const os = require('os');
 const path = require('path');
 const tmp = require('tmp-promise');
 const util = require('util');
+const wol = require('wol');
 
 const execFile = util.promisify(require('child_process').execFile);
 
@@ -56,6 +57,11 @@ async function loadOnTizen(flags, log, url) {
       // the Docker image in the /tmp directory, so our commands below will use
       // that path.
       dockerImageAppTemplatePath;
+
+  if (flags.wakeOnLanAddress) {
+    // Try to wake the Tizen device, in case it's asleep.
+    await wol.wake(flags.wakeOnLanAddress);
+  }
 
   commands = commands.concat([
     // Connect to the Tizen device.
@@ -171,6 +177,13 @@ function addTizenArgs(yargs) {
             '(default port number is 26101)',
         type: 'string',
         demandOption: true,
+      })
+      .option('wake-on-lan-address', {
+        description:
+            'The ethernet address of the Tizen host, which we will use to ' +
+            'wake the device if it is sleeping at the beginning of the ' +
+            'session.',
+        type: 'string',
       })
       .option('local-tizen-studio', {
         description:

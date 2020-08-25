@@ -38,6 +38,9 @@ properties:
  - `genericwebdriver.backend.params.hostname`: The hostname or IP address of the
    the Tizen device, with optional port number.  If omitted, this **must** be
    provided in the client's desired capabilities instead.  (See below.)
+ - `genericwebdriver.backend.params.wake-on-lan-address`: The ethernet address
+   of the Tizen device, to wake it in case it is sleeping at the beginning of
+   the session.  Optional, but highly recommended.
 
 
 ## Supported parameters
@@ -46,6 +49,8 @@ This backend supports the following parameters:
 
  - `hostname`: **(required)** The hostname or IP address of the Tizen device,
    with optional port number.
+ - `wake-on-lan-address`: The ethernet address of the Tizen device, to wake it
+   in case it is sleeping at the beginning of the session.
  - `local-tizen-studio`: If true, use a locally-installed copy of Tizen Studio
    instead of a Docker image.
  - `tizen-studio-docker-image`: The name of a Docker image to use for Tizen
