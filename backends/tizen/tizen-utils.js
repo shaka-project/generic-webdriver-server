@@ -140,6 +140,9 @@ async function loadOnTizen(flags, log, url) {
       // Run the command inside a Docker image.
       await execFile('docker', [
         'run',
+        // Clean up the container and virtual filesystem after the container
+        // exits.
+        '--rm',
         // Mount the app template into the Docker image.
         '-v', `${tmpDir.path}:${dockerImageAppTemplatePath}:ro`,
         // The name of the image.
