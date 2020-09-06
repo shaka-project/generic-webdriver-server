@@ -36,7 +36,7 @@ properties:
  - `genericwebdriver.backend.exe`: The path to the executable, such as
    `node_modules/tizen-webdriver-server/tizen-webdriver-server.js`
  - `genericwebdriver.backend.params.hostname`: The hostname or IP address of the
-   the Tizen device, with optional port number.  If omitted, this **must** be
+   Tizen device, with optional port number.  If omitted, this **must** be
    provided in the client's desired capabilities instead.  (See below.)
  - `genericwebdriver.backend.params.wake-on-lan-address`: The ethernet address
    of the Tizen device, to wake it in case it is sleeping at the beginning of
