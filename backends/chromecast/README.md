@@ -81,8 +81,20 @@ for directing a Chromecast to a specific URL.  For example, if installed
 globally with `npm install -g chromecast-webdriver-server`:
 
 ```sh
-chromecast-webdriver-cli --hostname=192.168.1.42 --url=https://www.google.com/
+chromecast-webdriver-cli --hostname=192.168.1.42 \
+  --url=https://shaka-player-demo.appspot.com/demo/
 ```
+
+
+## Access Limitations
+
+We show an arbitrary URL on the device by embedding it into an iframe in our
+Chromecast receiver app.  However, sites can prevent iframe-embedding with the
+[`X-Frame-Options` header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options).
+
+Though this should not be an issue for a test runner, this may affect other
+URLs.  Unfortunately, there is no way for the receiver app to detect when this
+has happened.  See: https://github.com/google/generic-webdriver-server/issues/8
 
 
 [Generic WebDriver Server]: https://github.com/google/generic-webdriver-server

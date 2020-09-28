@@ -47,6 +47,17 @@ app explicitly allows most features.  For a full list, refer to the variable
 Source: https://developer.mozilla.org/en-US/docs/Web/HTTP/Feature_Policy
 
 
+## Access Limitations
+
+We show an arbitrary URL on the device by embedding it into an iframe in our
+Chromecast receiver app.  However, sites can prevent iframe-embedding with the
+[`X-Frame-Options` header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options).
+
+Though this should not be an issue for a test runner, this may affect other
+URLs.  Unfortunately, there is no way for the receiver app to detect when this
+has happened.  See: https://github.com/google/generic-webdriver-server/issues/8
+
+
 ## Chromecast receiver deployment
 
 To learn how to deploy your own copy of the Chromecast Receiver, see
