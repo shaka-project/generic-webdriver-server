@@ -48,6 +48,15 @@ This backend supports the following parameters:
 
 ## Chromecast receiver deployment
 
+Deploying your own copy of the Chromecast receiver is completely optional.
+Doing so would allow you to:
+
+  1. Make changes to the receiver app that affect your clients
+  2. Not depend on github.io being up or accessible from your network
+
+Unless you need one of these things, we recommend using the default receiver
+app ID, which points to a copy served by github.io.
+
 To learn how to deploy your own copy of the Chromecast Receiver, see
 [receiver-deployment.md](https://github.com/google/generic-webdriver-server/blob/main/backends/chromecast/receiver-deployment.md)
 for details.
