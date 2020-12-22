@@ -30,6 +30,27 @@ the name of the application entry point for Selenium, which we would not have to
 specify when running the typical `java -jar selenium-server-...` command for
 Selenium, but it required when using `-cp`.
 
+*NOTE: On Windows, the classpath separator is a semicolon (`;`), not a colon
+(`:`).*  So on Windows, you would use something like this in bash:
+
+```sh
+java \
+  -cp node_modules/generic-webdriver-server/GenericWebDriverProvider.jar\;node_modules/generic-webdriver-server/selenium-server-standalone-3.141.59.jar \
+  org.openqa.grid.selenium.GridLauncherV3 \
+  -role node \
+  -nodeConfig foo.json
+```
+
+Or this in a batch file:
+
+```bat
+java ^
+  -cp node_modules\generic-webdriver-server\GenericWebDriverProvider.jar;node_modules\generic-webdriver-server\selenium-server-standalone-3.141.59.jar ^
+  org.openqa.grid.selenium.GridLauncherV3 ^
+  -role node ^
+  -nodeConfig foo.json
+```
+
 You also need to configure `GenericWebDriverProvider.jar` with Java system
 properties so it knows which backend to start.  This is done with `-D` arguments
 before the class path and entry point.  For example:

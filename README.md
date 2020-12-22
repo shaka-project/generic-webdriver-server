@@ -39,6 +39,14 @@ Out of the box, we provide backends for:
 In addition, you'll need JAR files from the package [`generic-webdriver-server`](https://www.npmjs.com/package/generic-webdriver-server).
 
 
+## Chromium-based Edge
+
+In addition to the backends we provide, you can also use this generic backend to
+support Chromium-based Edge in Selenium 3, in spite of [Selenium's recent
+decision not to support it directly.](https://github.com/SeleniumHQ/selenium/issues/8237#issuecomment-629851734)
+For details on setup for Chromium-based Edge, see [Edgium.md](https://github.com/google/generic-webdriver-server/blob/main/Edgium.md)
+
+
 ## How it works
 
 See [how-it-works.md](https://github.com/google/generic-webdriver-server/blob/main/how-it-works.md)
