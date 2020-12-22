@@ -1,3 +1,8 @@
+## 1.1.0 (2020-12-22)
+
+Document setup with Chromium-based Edge.  Although this didn't require any code
+changes, it is worth a feature release to properly document this feature.
+
 ## 1.0.4 (2020-08-04)
 
 Set Java target version to 6 for GenericWebDriverProvider.jar.
