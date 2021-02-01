@@ -40,7 +40,8 @@ properties:
    provided in the client's desired capabilities instead.  (See below.)
  - `genericwebdriver.backend.params.wake-on-lan-address`: The ethernet address
    of the Tizen device, to wake it in case it is sleeping at the beginning of
-   the session.  Optional, but highly recommended.
+   the session.  Optional, but highly recommended.  NOTE: This will only work
+   over wired ethernet connections, **not WiFi**!
 
 
 ## Supported parameters
@@ -50,7 +51,9 @@ This backend supports the following parameters:
  - `hostname`: **(required)** The hostname or IP address of the Tizen device,
    with optional port number.
  - `wake-on-lan-address`: The ethernet address of the Tizen device, to wake it
-   in case it is sleeping at the beginning of the session.
+   in case it is sleeping at the beginning of the session.  Optional, but
+   highly recommended.  NOTE: This will only work over wired ethernet
+   connections, **not WiFi**!
  - `local-tizen-studio`: If true, use a locally-installed copy of Tizen Studio
    instead of a Docker image.
  - `tizen-studio-docker-image`: The name of a Docker image to use for Tizen
@@ -95,7 +98,8 @@ directing a Tizen device to a specific URL.  For example, if installed globally
 with `npm install -g tizen-webdriver-server`:
 
 ```sh
-tizen-webdriver-cli --hostname=192.168.1.42 --url=https://www.google.com/
+tizen-webdriver-cli --hostname=192.168.1.42 \
+  --url=https://shaka-player-demo.appspot.com/demo/
 ```
 
 

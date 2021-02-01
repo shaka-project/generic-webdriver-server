@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  IgnorableNamespaces="uap mp">
+
+  <Identity
+    Name="25796bff-2d0c-4ce0-82f4-862db940a2fd"
+    Publisher="CN=generic-webdriver-server"
+    Version="1.0.0.0" />
+
+  <mp:PhoneIdentity PhoneProductId="25796bff-2d0c-4ce0-82f4-862db940a2fd" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+
+  <Properties>
+    <DisplayName>Xbox One WebDriver Server</DisplayName>
+    <PublisherDisplayName>generic-webdriver-server</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="x-generate"/>
+  </Resources>
+
+  <Applications>
+    <Application Id="App"
+      Executable="$targetnametoken$.exe"
+      EntryPoint="XboxOneWebDriverServer.App">
+      <uap:VisualElements
+        DisplayName="Xbox One WebDriver Server"
+        Square150x150Logo="Assets\Square150x150Logo.png"
+        Square44x44Logo="Assets\Square44x44Logo.png"
+        Description="XboxOneWebDriverServer"
+        BackgroundColor="transparent">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
+        <uap:SplashScreen Image="Assets\SplashScreen.png" />
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <Capability Name="internetClient" />
+
+    <!--
+    Added by hand to Enable PlayReady DRM.
+    https://docs.microsoft.com/en-us/windows/uwp/audio-video-camera/playready-client-sdk#use-playready-drm-on-xbox-one
+    -->
+    <DeviceCapability Name="6a7e5907-885c-4bcb-b40a-073c067bd3d5" />
+  </Capabilities>
+</Package>
