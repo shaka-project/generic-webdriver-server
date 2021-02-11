@@ -7,10 +7,18 @@ WebDriver protocol necessary for [Karma][].  Add Xbox One devices to your
 Part of the [Generic WebDriver Server][] family.
 
 
+## Supported Models
+
+These tools should work on Xbox One, Xbox One X, Xbox One S, Xbox Series X, and
+Xbox Series S devices.
+
+These tools will **not** work with Xbox 360 or the original Xbox devices.
+
+
 ## Prerequisites
 
 To use these tools, you will need:
- - Xbox One device in Dev Mode
+ - Xbox One (or One X, One S, Series X, Series S) device in Dev Mode
  - Windows 10 host
  - Visual Studio 2015 Update 3, Visual Studio 2017, or Visual Studio 2019
  - Windows 10 SDK w/ Universal Windows App Development Tools (UWP)
