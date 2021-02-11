@@ -134,7 +134,7 @@ See [how-it-works.md](https://github.com/google/generic-webdriver-server/blob/ma
 for details.
 
 
-## Tunneling to a Xbox One device on another network
+## Tunneling to an Xbox One device on another network
 
 See [tunneling.md](https://github.com/google/generic-webdriver-server/blob/main/backends/xbox-one/tunneling.md)
 for details.
@@ -142,8 +142,8 @@ for details.
 
 ## Using the CLI
 
-In addition to running a Xbox One node in Selenium, this package offers a CLI
-for directing a Xbox One device to a specific URL.  For example, if installed
+In addition to running an Xbox One node in Selenium, this package offers a CLI
+for directing an Xbox One device to a specific URL.  For example, if installed
 globally with `npm install -g xbox-one-webdriver-server`:
 
 ```sh

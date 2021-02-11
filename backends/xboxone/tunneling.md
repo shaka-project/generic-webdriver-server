@@ -1,4 +1,4 @@
-# Tunneling to a Xbox One Device on Another Network
+# Tunneling to an Xbox One Device on Another Network
 
 If your Selenium node runs on a separate network from your Xbox One device,
 you may need to create a tunnel to that other network.  This document will
