@@ -310,17 +310,15 @@ function httpRequestHelper(
  * @return {?string} The path to MSBuild.exe, or null if not found.
  */
 function findMsbuild() {
-  const basePath = 'Program Files (x86)\\Microsoft Visual Studio';
+  const basePath = 'Program Files (x86)\\Microsoft Visual Studio\\2019';
 
   for (const drive of 'cdefghijklmnopqrstuvwxyz') {
-    for (const version of ['2017', '2019']) {
-      // Microsoft's VS docs call these versions of Visual Studio "Offerings".
-      for (const offering of ['Enterprise', 'Professional', 'Community']) {
-        const vsPath = `${drive}:\\${basePath}\\${version}\\${offering}`;
-        const msbuildPath = `${vsPath}\\MSBuild\\Current\\Bin\\MSBuild.exe`;
-        if (fs.existsSync(msbuildPath)) {
-          return msbuildPath;
-        }
+    // Microsoft's VS docs call these versions of Visual Studio "Offerings".
+    for (const offering of ['Enterprise', 'Professional', 'Community']) {
+      const vsPath = `${drive}:\\${basePath}\\${offering}`;
+      const msbuildPath = `${vsPath}\\MSBuild\\Current\\Bin\\MSBuild.exe`;
+      if (fs.existsSync(msbuildPath)) {
+        return msbuildPath;
       }
     }
   }

@@ -62,9 +62,11 @@ To use these tools, you will need:
    Studio 2019, install it now: https://visualstudio.microsoft.com/
 2. When installing the Windows 10 SDK, check Universal Windows App Development
    Tools: https://docs.microsoft.com/en-us/windows/uwp/xbox-apps/development-environment-setup
-3. If you install Visual Studio in any unusual location, you may have to
-   provide an explicit path to `MSBuild.exe` when you configure the WebDriver
-   server later.
+3. If you have VS 2015 or VS 2017, or if you install Visual Studio in any
+   unusual location, you may have to provide an explicit path to `MSBuild.exe`
+   when you configure the WebDriver server later.  (We have only tested the
+   automatic configuration of the MSBuild path in VS 2019.  See `msbuild`
+   parameter described below under "Usage".)
 
 
 ### Screenshot setup
@@ -112,7 +114,8 @@ properties:
    capabilities instead.  (See below.)
  - `genericwebdriver.backend.params.msbuild`: The path to `MSBuild.exe` from
    Visual Studio.  The server will attempt to locate this at typical locations
-   on all drives.  If that fails, this option becomes **required**.
+   on all drives.  If that fails, this option becomes **required**.  For Visual
+   Studio 2015 or Visual Studio 2017, this option is also **required**.
 
 
 ## Supported parameters
@@ -125,7 +128,8 @@ This backend supports the following parameters:
  - `password`: **(required)** The Xbox One Device Portal password.
  - `msbuild`: The path to `MSBuild.exe` from Visual Studio.  The server will
    attempt to locate this at typical locations on all drives.  If that fails,
-   this option becomes **required**.
+   this option becomes **required**.  For Visual Studio 2015 or Visual Studio
+   2017, this option is also **required**.
 
 
 ## How it works
