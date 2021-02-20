@@ -182,7 +182,8 @@ function addTizenArgs(yargs) {
         description:
             'The ethernet address of the Tizen host, which we will use to ' +
             'wake the device if it is sleeping at the beginning of the ' +
-            'session.',
+            'session.  Optional, but highly recommended.  NOTE: This will ' +
+            'only work over wired ethernet connections, **not WiFi**!',
         type: 'string',
       })
       .option('local-tizen-studio', {

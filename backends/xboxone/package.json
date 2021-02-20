@@ -1,0 +1,37 @@
+{
+  "name": "xbox-one-webdriver-server",
+  "description": "An Xbox One WebDriver server that pushes URLs to Xbox One devices, built on generic-webdriver-server.",
+  "version": "1.0.0",
+  "homepage": "https://github.com/google/generic-webdriver-server",
+  "author": "Google",
+  "license": "Apache-2.0",
+  "maintainers": [
+    {
+      "name": "Joey Parrish",
+      "email": "joeyparrish@google.com"
+    }
+  ],
+  "keywords": [
+    "karma",
+    "selenium",
+    "xbox-one",
+    "webdriver"
+  ],
+  "main": "xbox-one-webdriver-server.js",
+  "scripts": {
+    "lint": "(cd ../../; npx eslint --ignore-path .gitignore --max-warnings 0 backends/xboxone/)",
+    "checkClean": "[[ -z \"$(git status --short .)\" ]] || (echo \"Git not clean!\"; git status .; exit 1)",
+    "pretest": "npm run lint",
+    "prepack": "npm run lint && npm run checkClean"
+  },
+  "bin": {
+    "xbox-one-webdriver-cli": "./xbox-one-webdriver-cli.js",
+    "xbox-one-webdriver-server": "./xbox-one-webdriver-server.js"
+  },
+  "dependencies": {
+    "form-data": "^3.0.0",
+    "fs-extra": "^9.1.0",
+    "generic-webdriver-server": "^1.1.0",
+    "tmp-promise": "^3.0.2"
+  }
+}

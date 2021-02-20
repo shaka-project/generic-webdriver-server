@@ -1,3 +1,7 @@
+## 1.1.1 (2021-02-11)
+
+Added links to Xbox One backend package from base package README.
+
 ## 1.1.0 (2020-12-22)
 
 Document setup with Chromium-based Edge.  Although this didn't require any code
