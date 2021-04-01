@@ -29,7 +29,7 @@
     "tizen-webdriver-server": "./tizen-webdriver-server.js"
   },
   "dependencies": {
-    "generic-webdriver-server": "^1.0.0",
+    "generic-webdriver-server": "^1.1.2",
     "tmp-promise": "^3.0.2",
     "wol": "^1.0.7"
   }
