@@ -29,7 +29,7 @@
     "chromecast-webdriver-server": "./chromecast-webdriver-server.js"
   },
   "dependencies": {
-    "castv2": "^0.1.9",
-    "generic-webdriver-server": "^1.0.0"
+    "castv2": "^0.1.10",
+    "generic-webdriver-server": "^1.1.2"
   }
 }
