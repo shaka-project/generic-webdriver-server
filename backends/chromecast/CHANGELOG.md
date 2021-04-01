@@ -1,3 +1,7 @@
+## 1.0.3 (2021-04-01)
+
+Update all dependencies.
+
 ## 1.0.2 (2020-09-28)
 
 Update docs to:
