@@ -17,7 +17,7 @@
 
 const fetch = require('node-fetch');
 const fs = require('fs');
-const NodeSSH = require('node-ssh');
+const {NodeSSH} = require('node-ssh');
 const path = require('path');
 
 // A URL where the default SSH private key for dev-mode ChromeOS can be found.
