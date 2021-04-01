@@ -1,7 +1,7 @@
 {
   "name": "tizen-webdriver-server",
   "description": "A Tizen WebDriver server that pushes URLs to Tizen devices, built on generic-webdriver-server.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "homepage": "https://github.com/google/generic-webdriver-server",
   "author": "Google",
   "license": "Apache-2.0",
