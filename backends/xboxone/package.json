@@ -29,9 +29,9 @@
     "xbox-one-webdriver-server": "./xbox-one-webdriver-server.js"
   },
   "dependencies": {
-    "form-data": "^3.0.0",
+    "form-data": "^4.0.0",
     "fs-extra": "^9.1.0",
-    "generic-webdriver-server": "^1.1.0",
+    "generic-webdriver-server": "^1.1.2",
     "tmp-promise": "^3.0.2"
   }
 }
