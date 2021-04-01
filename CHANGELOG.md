@@ -1,3 +1,7 @@
+## 1.1.2 (2021-04-01)
+
+Bump yargs dependency.
+
 ## 1.1.1 (2021-02-11)
 
 Added links to Xbox One backend package from base package README.
