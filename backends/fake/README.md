@@ -10,9 +10,8 @@ integration in general.
 
 ## Installation
 
-```sh
-npm install --save-dev generic-webdriver-server fake-webdriver-server
-```
+This is a template and has not been published as a real package.  You can't
+install it via NPM!
 
 
 ## Usage
@@ -27,7 +26,7 @@ properties:
  - `genericwebdriver.browser.name`: The name of your fake browser.  See also
    notes in the ["Setup" doc][].
  - `genericwebdriver.backend.exe`: The path to the executable, such as
-   `node_modules/fake-webdriver-server/fake-webdriver-server.js`
+   `path/to/generic-webdriver-server/backends/fake/fake-webdriver-server.js`
 
 
 ## Supported parameters
