@@ -29,7 +29,7 @@
     "yargs": "^16.2.0"
   },
   "devDependencies": {
-    "eslint": "^7.4.0",
+    "eslint": "^7.26.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-jsdoc": "^30.0.2"
   }
