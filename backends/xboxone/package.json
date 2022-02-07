@@ -1,7 +1,7 @@
 {
   "name": "xbox-one-webdriver-server",
   "description": "An Xbox One WebDriver server that pushes URLs to Xbox One devices, built on generic-webdriver-server.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "homepage": "https://github.com/google/generic-webdriver-server",
   "author": "Google",
   "license": "Apache-2.0",
@@ -31,7 +31,7 @@
   "dependencies": {
     "form-data": "^4.0.0",
     "fs-extra": "^9.1.0",
-    "generic-webdriver-server": "^1.1.2",
+    "generic-webdriver-server": "^1.1.3",
     "tmp-promise": "^3.0.2"
   }
 }

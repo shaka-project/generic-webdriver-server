@@ -1,3 +1,7 @@
+## 1.0.4 (2022-02-07)
+
+Bump dependencies to resolve DoS issues in indirect dependencies.
+
 ## 1.0.3 (2021-04-01)
 
 Update all dependencies.

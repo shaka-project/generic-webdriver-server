@@ -1,7 +1,7 @@
 {
   "name": "chromecast-webdriver-server",
   "description": "A WebDriver server that pushes URLs to Chromecast, built on generic-webdriver-server.",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "homepage": "https://github.com/google/generic-webdriver-server",
   "author": "Google",
   "license": "Apache-2.0",
@@ -30,6 +30,6 @@
   },
   "dependencies": {
     "castv2": "^0.1.10",
-    "generic-webdriver-server": "^1.1.2"
+    "generic-webdriver-server": "^1.1.3"
   }
 }

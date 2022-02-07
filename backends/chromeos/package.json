@@ -1,7 +1,7 @@
 {
   "name": "chromeos-webdriver-server",
   "description": "A WebDriver server that pushes URLs to ChromeOS devices, built on generic-webdriver-server.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "homepage": "https://github.com/google/generic-webdriver-server",
   "author": "Google",
   "license": "Apache-2.0",
@@ -30,8 +30,8 @@
     "chromeos-webdriver-server": "./chromeos-webdriver-server.js"
   },
   "dependencies": {
-    "generic-webdriver-server": "^1.1.2",
+    "generic-webdriver-server": "^1.1.3",
     "node-fetch": "^3.1.1",
-    "node-ssh": "^11.1.1"
+    "node-ssh": "^12.0.3"
   }
 }
