@@ -63,3 +63,4 @@ for details.
 [Karma]: https://karma-runner.github.io/
 [Selenium grid]: https://www.selenium.dev/documentation/en/grid/
 [WebDriver]: https://www.w3.org/TR/webdriver2/
+
