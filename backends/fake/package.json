@@ -18,7 +18,7 @@
   ],
   "main": "fake-webdriver-server.js",
   "scripts": {
-    "lint": "(cd ../../; npx eslint --ignore-path .gitignore --max-warnings 0 backends/fake/)",
+    "lint": "true # linted at the top level",
     "checkClean": "[[ -z \"$(git status --short .)\" ]] || (echo \"Git not clean!\"; git status .; exit 1)",
     "test": "npm run lint",
     "prepack": "npm run lint && npm run checkClean"

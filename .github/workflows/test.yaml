@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    name: Build and Lint on ${{ matrix.os }}, Node.js ${{ matrix.node-version }}
+    name: Build and Test on ${{ matrix.os }}, Node.js ${{ matrix.node-version }}
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -13,8 +13,11 @@ jobs:
         # Oldest supported LTS version through current LTS
         node-version: [12.x, 14.x, 16.x]
         os: [macOS-latest, windows-latest, ubuntu-latest]
+      fail-fast: false
 
     steps:
+      - name: Configure git
+        run: git config --global core.autocrlf false
       - name: Checkout Code
         uses: actions/checkout@v2
       - name: Setup Node.js ${{ matrix.node-version }}
@@ -22,7 +25,14 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install Deps
-        run: npm ci
+        shell: bash
+        run: |
+          npm ci
+          for i in backends/*/; do
+            pushd "$i"
+            npm ci
+            popd
+          done
       - name: Build Selenium DriverProvider JAR
         run: npm run jar
       - name: Test all packages
