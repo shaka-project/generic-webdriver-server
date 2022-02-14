@@ -1,0 +1,36 @@
+name: test
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build:
+    name: Build and Lint on ${{ matrix.os }}, Node.js ${{ matrix.node-version }}
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        # Oldest supported LTS version through current LTS
+        node-version: [12.x, 14.x, 16.x]
+        os: [macOS-latest, windows-latest, ubuntu-latest]
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install Deps
+        run: npm ci
+      - name: Build Selenium DriverProvider JAR
+        run: npm run jar
+      - name: Test all packages
+        shell: bash
+        run: |
+          npm test
+          for i in backends/*/; do
+            pushd "$i"
+            npm test
+            popd
+          done

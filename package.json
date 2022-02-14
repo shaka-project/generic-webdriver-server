@@ -21,7 +21,7 @@
     "lint": "eslint --ignore-path .gitignore --max-warnings 0 .",
     "jar": "ant -f java/build.xml jar && cp java/build/jar/*.jar java/third_party/selenium*.jar ./",
     "checkClean": "[[ -z \"$(git status --short .)\" ]] || (echo \"Git not clean!\"; git status .; exit 1)",
-    "pretest": "npm run lint",
+    "test": "npm run lint",
     "prepack": "npm run lint && npm run checkClean && npm run jar"
   },
   "dependencies": {
