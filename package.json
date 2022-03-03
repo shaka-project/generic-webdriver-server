@@ -2,7 +2,7 @@
   "name": "generic-webdriver-server",
   "description": "A generic WebDriver server base class and a Selenium add-on to invoke it.",
   "version": "1.1.3",
-  "homepage": "https://github.com/google/generic-webdriver-server",
+  "homepage": "https://github.com/shaka-project/generic-webdriver-server",
   "author": "Google",
   "license": "Apache-2.0",
   "maintainers": [
