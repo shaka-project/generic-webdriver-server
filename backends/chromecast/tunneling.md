@@ -65,6 +65,6 @@ java \
 ```
 
 
-[Generic WebDriver Server]: https://github.com/google/generic-webdriver-server
-["Setting parameters"]: https://github.com/google/generic-webdriver-server/blob/main/setup.md#setting-parameters
-["Setup" doc]: https://github.com/google/generic-webdriver-server/blob/main/setup.md
+[Generic WebDriver Server]: https://github.com/shaka-project/generic-webdriver-server
+["Setting parameters"]: https://github.com/shaka-project/generic-webdriver-server/blob/main/setup.md#setting-parameters
+["Setup" doc]: https://github.com/shaka-project/generic-webdriver-server/blob/main/setup.md

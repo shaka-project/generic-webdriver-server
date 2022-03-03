@@ -13,7 +13,7 @@ can use it to configure Selenium 3 to respond to Edge and use Microsoft's
 `msedgedriver.exe` as a backend executable.
 
 If you haven't read
-[setup.md](https://github.com/google/generic-webdriver-server/blob/main/setup.md)
+[setup.md](https://github.com/shaka-project/generic-webdriver-server/blob/main/setup.md)
 yet, that is where you will find general information on setting up Generic
 WebDriver Server.  This document will focus on specific setup instructions for
 Chromium-based Edge.

@@ -134,13 +134,13 @@ This backend supports the following parameters:
 
 ## How it works
 
-See [how-it-works.md](https://github.com/google/generic-webdriver-server/blob/main/backends/xbox-one/how-it-works.md)
+See [how-it-works.md](https://github.com/shaka-project/generic-webdriver-server/blob/main/backends/xbox-one/how-it-works.md)
 for details.
 
 
 ## Tunneling to an Xbox One device on another network
 
-See [tunneling.md](https://github.com/google/generic-webdriver-server/blob/main/backends/xbox-one/tunneling.md)
+See [tunneling.md](https://github.com/shaka-project/generic-webdriver-server/blob/main/backends/xbox-one/tunneling.md)
 for details.
 
 
@@ -157,8 +157,8 @@ xbox-one-webdriver-cli.cmd ^
 ```
 
 
-[Generic WebDriver Server]: https://github.com/google/generic-webdriver-server
+[Generic WebDriver Server]: https://github.com/shaka-project/generic-webdriver-server
 [Karma]: https://karma-runner.github.io/
 [Selenium grid]: https://www.selenium.dev/documentation/en/grid/
-["Setup" doc]: https://github.com/google/generic-webdriver-server/blob/main/setup.md
+["Setup" doc]: https://github.com/shaka-project/generic-webdriver-server/blob/main/setup.md
 [WebDriver]: https://www.w3.org/TR/webdriver2/

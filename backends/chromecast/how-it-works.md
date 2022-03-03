@@ -55,7 +55,7 @@ Chromecast receiver app.  However, sites can prevent iframe-embedding with the
 
 Though this should not be an issue for a test runner, this may affect other
 URLs.  Unfortunately, there is no way for the receiver app to detect when this
-has happened.  See: https://github.com/google/generic-webdriver-server/issues/8
+has happened.  See: https://github.com/shaka-project/generic-webdriver-server/issues/8
 
 
 ## Chromecast receiver deployment

@@ -44,7 +44,7 @@ It doesn't!  If you hook this up to [Karma][], Karma will time out waiting for
 the "browser" to connect back to it.
 
 
-[Generic WebDriver Server]: https://github.com/google/generic-webdriver-server
+[Generic WebDriver Server]: https://github.com/shaka-project/generic-webdriver-server
 [Karma]: https://karma-runner.github.io/
-["Setup" doc]: https://github.com/google/generic-webdriver-server/blob/main/setup.md
+["Setup" doc]: https://github.com/shaka-project/generic-webdriver-server/blob/main/setup.md
 [WebDriver]: https://www.w3.org/TR/webdriver2/
