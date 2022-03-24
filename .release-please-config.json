@@ -1,0 +1,11 @@
+{
+  "bootstrap-sha": "6d25ad0fe4541d11f4f7f6c6c45f3d28ade67b55",
+  "separate-pull-requests": true,
+  "packages": {
+    "base": {},
+    "backends/chromecast": {},
+    "backends/chromeos": {},
+    "backends/tizen": {},
+    "backends/xboxone": {}
+  }
+}
