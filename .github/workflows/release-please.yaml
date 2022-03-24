@@ -1,0 +1,70 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      # Create/update release PR
+      - uses: google-github-actions/release-please-action@v3
+        id: release
+        with:
+          # These are the necessary parameters for releasing multiple packages
+          # from a single repo.
+          command: manifest
+          config-file: .release-please-config.json
+          manifest-file: .release-please-manifest.json
+          monorepo-tags: true
+
+      - name: Checkout code
+        if: steps.release.outputs.releases_created
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        if: steps.release.outputs.releases_created
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Publish all changed packages
+        if: steps.release.outputs.releases_created
+        run: |
+          npm ci
+          npm --prefix base ci
+
+          for i in base backends/*; do
+            PACKAGE=$(jq -r .name < "$i"/package.json)
+            SOURCE_VERSION=$(jq -r .version < "$i"/package.json)
+            LAST_PUBLISHED=$(npm view "$PACKAGE" version 2>/dev/null)
+            PRIVATE=$(jq -r .private < "$i"/package.json)
+
+            if [[ "$PRIVATE" == "true" ]]; then
+              echo "Skipping $i ($PACKAGE is private)"
+              continue
+            fi
+
+            if [[ "$LAST_PUBLISHED" == "$SOURCE_VERSION" ]]; then
+              echo "Skipping $i ($PACKAGE $SOURCE_VERSION is up-to-date)"
+              continue
+            fi
+
+            echo "Publishing $i ($PACKAGE $SOURCE_VERSION replacing $LAST_PUBLISHED)"
+
+            # NOTE: Using npm --prefix _DOES NOT_ seem to work with publish
+            # here.  So we use pushd/popd instead.
+            set -e
+            pushd "$i"
+
+            npm ci
+            npm publish
+
+            popd
+            set +e
+          done
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

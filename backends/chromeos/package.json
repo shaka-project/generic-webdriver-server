@@ -20,8 +20,8 @@
   ],
   "main": "chromeos-webdriver-server.js",
   "scripts": {
-    "lint": "true # linted at the top level",
-    "checkClean": "[[ -z \"$(git status --short .)\" ]] || (echo \"Git not clean!\"; git status .; exit 1)",
+    "lint": "eslint --ignore-path ../../.gitignore --max-warnings 0 .",
+    "checkClean": "test -z \"$(git status --short .)\" || (echo \"Git not clean!\"; git status .; exit 1)",
     "test": "npm run lint",
     "prepack": "npm run lint && npm run checkClean"
   },
@@ -33,5 +33,8 @@
     "generic-webdriver-server": "^1.1.3",
     "node-fetch": "^3.1.1",
     "node-ssh": "^12.0.3"
-  }
+  },
+  "workspaces": [
+    "../../base"
+  ]
 }

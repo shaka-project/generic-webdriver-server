@@ -1,11 +1,11 @@
-name: test
+name: Test
 on:
   pull_request:
     types: [opened, synchronize, reopened]
 
 jobs:
   build:
-    name: Build and Test on ${{ matrix.os }}, Node.js ${{ matrix.node-version }}
+    name: ${{ matrix.os }}, Node.js ${{ matrix.node-version }}
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -18,29 +18,39 @@ jobs:
     steps:
       - name: Configure git
         run: git config --global core.autocrlf false
-      - name: Checkout Code
+
+      - name: Checkout code
         uses: actions/checkout@v2
+
       - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Install Deps
+
+      - name: Install deps
         shell: bash
         run: |
+          # npm v7+ (node v16+) has "workspaces" support, which is very useful
+          # for this project.  But since we're testing unmerged code on many
+          # older versions of node, we have to upgrade npm to a version that
+          # supports the workspace definitions in our package locks.
+          npm install -g npm@8
+
+          # Install root level, shared dependencies, which are necessary for
+          # eslint.
           npm ci
-          for i in backends/*/; do
-            pushd "$i"
-            npm ci
-            popd
+
+          for i in base backends/*; do
+            # Install dependencies for each module.
+            npm --prefix "$i" ci
           done
+
       - name: Build Selenium DriverProvider JAR
-        run: npm run jar
+        run: cd base && npm run jar
+
       - name: Test all packages
         shell: bash
         run: |
-          npm test
-          for i in backends/*/; do
-            pushd "$i"
-            npm test
-            popd
+          for i in base backends/*; do
+            npm --prefix "$i" test
           done

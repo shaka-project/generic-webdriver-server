@@ -1,4 +1,4 @@
 *.swp
 node_modules
-java/build
+base/java/build
 *.jar

@@ -15,25 +15,11 @@
  * limitations under the License.
  */
 
+const {
+  GenericSingleSessionWebDriverServer,
+  yargs,
+} = require('generic-webdriver-server');
 
-let baseModule;
-try {
-  // To support easy development when making changes in the source repo, we
-  // first try looking for a copy of the base module using a relative path.  In
-  // this context, we prefer the local copy over one that may already be
-  // installed.
-  baseModule = require('../../generic-webdriver-server');
-} catch (error) {
-  if (!error.message.includes('Cannot find module')) {
-    throw error;
-  }
-
-  // When this module is running in an installed context, we fall back to
-  // requiring the installed base module by name.
-  baseModule = require('generic-webdriver-server');
-}
-
-const {GenericSingleSessionWebDriverServer, yargs} = baseModule;
 const {loadOnTizen, addTizenArgs} = require('./tizen-utils');
 
 /** WebDriver server backend for Tizen */

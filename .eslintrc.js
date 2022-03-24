@@ -15,6 +15,7 @@
  */
 
 module.exports = {
+  root: true,
   extends: ['eslint:recommended', 'google', 'plugin:jsdoc/recommended'],
   env: {
     node: true, // Things like require()
