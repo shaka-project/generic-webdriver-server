@@ -39,14 +39,15 @@ jobs:
 
           for i in base backends/*; do
             PACKAGE=$(jq -r .name < "$i"/package.json)
-            SOURCE_VERSION=$(jq -r .version < "$i"/package.json)
-            LAST_PUBLISHED=$(npm view "$PACKAGE" version 2>/dev/null)
             PRIVATE=$(jq -r .private < "$i"/package.json)
 
             if [[ "$PRIVATE" == "true" ]]; then
               echo "Skipping $i ($PACKAGE is private)"
               continue
             fi
+
+            SOURCE_VERSION=$(jq -r .version < "$i"/package.json)
+            LAST_PUBLISHED=$(npm view "$PACKAGE" version 2>/dev/null)
 
             if [[ "$LAST_PUBLISHED" == "$SOURCE_VERSION" ]]; then
               echo "Skipping $i ($PACKAGE $SOURCE_VERSION is up-to-date)"
