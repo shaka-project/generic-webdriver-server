@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.4](https://github.com/shaka-project/generic-webdriver-server/compare/generic-webdriver-server-v1.1.3...generic-webdriver-server-v1.1.4) (2022-03-30)
+
+
+### Bug Fixes
+
+* Await session closure on shutdown ([#45](https://github.com/shaka-project/generic-webdriver-server/issues/45)) ([b05dfd0](https://github.com/shaka-project/generic-webdriver-server/commit/b05dfd023960fe5a8f0bfbe38dfe714f3893ac76)), closes [#44](https://github.com/shaka-project/generic-webdriver-server/issues/44)
+
 ### [1.1.3](https://github.com/shaka-project/generic-webdriver-server/compare/generic-webdriver-server-v1.1.2...generic-webdriver-server-v1.1.3) (2022-02-07)
 
 Bump dependencies to resolve DoS issues in indirect dependencies.
