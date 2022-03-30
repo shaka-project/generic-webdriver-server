@@ -478,7 +478,7 @@ class GenericSingleSessionWebDriverServer extends GenericWebDriverServer {
   /** @override */
   async shutdown() {
     if (this.sessionId_) {
-      this.closeSession(this.sessionId_);
+      await this.closeSession(this.sessionId_);
     }
 
     await this.shutdownSingleSession();
