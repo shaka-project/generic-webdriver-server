@@ -41,8 +41,13 @@ class XboxOneWebDriverServer extends GenericSingleSessionWebDriverServer {
 
   /** @override */
   async closeSingleSession() {
-    // Send the device back to the home screen.
-    await loadOnXboxOne(this.flags, this.log, null);
+    this.log.debug('Close requested.');
+    try {
+      await loadOnXboxOne(this.flags, this.log, null);
+    } catch (error) {
+      this.log.error('Error closing session\n', error);
+    }
+    this.log.debug('Close complete.');
   }
 
   /** @override */

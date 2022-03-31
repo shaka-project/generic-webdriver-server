@@ -34,6 +34,17 @@ const defaultPort = 11443;  // For the Xbox One Device Portal
 const packageFolderName = 'XboxOneWebDriverServer_1.0.0.0_Test';
 const packageBundleName = 'XboxOneWebDriverServer_1.0.0.0_x64.msixbundle';
 
+// Sometimes, a launch will fail with ERROR_INSTALL_REGISTRATION_FAILURE.  This
+// is especially true when launching tests over and over in a loop.  It is
+// unclear what is causing it, but the situation usually resolves itself after
+// a few minutes.
+const launchRetryDelay = 30;  // seconds
+const numLaunchRetries = 10;
+
+// A Microsoft error code and its official name.
+const ERROR_INSTALL_REGISTRATION_FAILURE = -2147009290;
+
+
 // Main API reference docs:
 // https://docs.microsoft.com/en-us/windows/uwp/debug-test-perf/device-portal-api-core
 // https://docs.microsoft.com/en-us/windows/uwp/xbox-apps/reference
@@ -72,7 +83,7 @@ async function loadOnXboxOne(flags, log, url) {
       await installApp(
           tmpDir.path, flags.hostname, flags.username, flags.password);
       log.info('Launching app');
-      await launchApp(flags.hostname, flags.username, flags.password);
+      await launchApp(log, flags.hostname, flags.username, flags.password);
     } finally {
       // Remove our temporary directory.
       tmpDir.cleanup();
@@ -186,16 +197,45 @@ async function installApp(tempPath, xboxOneAddress, username, password) {
 /**
  * Launch the application on the specified Xbox One.
  *
+ * @param {Console} log A Console-like interface for logging.  Can be "console".
  * @param {string} xboxOneAddress The IP or hostname of the Xbox One device.
  * @param {string} username The username to authenticate to the Device Portal.
  * @param {string} password The password to authenticate to the Device Portal.
  * @return {!Promise}
  */
-async function launchApp(xboxOneAddress, username, password) {
-  // https://docs.microsoft.com/en-us/windows/uwp/debug-test-perf/device-portal-api-core#start-a-modern-app
-  await httpRequestHelper(
-      xboxOneAddress, username, password,
-      'POST', `api/taskmanager/app?appid=${appIdBase64}`);
+async function launchApp(log, xboxOneAddress, username, password) {
+  for (let i = 0; i < numLaunchRetries; ++i) {
+    try {
+      // https://docs.microsoft.com/en-us/windows/uwp/debug-test-perf/device-portal-api-core#start-a-modern-app
+      // Return right away on success.
+      return await httpRequestHelper(
+          xboxOneAddress, username, password,
+          'POST', `api/taskmanager/app?appid=${appIdBase64}`);
+    } catch (error) {
+      let xboxError = {};
+      try {
+        xboxError = JSON.parse(error.body);
+      } catch (jsonError) {
+        // JSON parsing errors are ignored.
+      }
+
+      if (xboxError.ErrorCode == ERROR_INSTALL_REGISTRATION_FAILURE) {
+        log.debug('Launch failure (ERROR_INSTALL_REGISTRATION_FAILURE).');
+        if (i == numLaunchRetries - 1) {
+          // No more retries.
+          throw error;
+        }
+
+        log.debug('Retrying after delay.');
+        await delay(launchRetryDelay);
+
+        log.debug('Retrying launch.');
+      } else {
+        // A different error than the one we handle automatically.
+        throw error;
+      }
+    }
+  }
 }
 
 /**
@@ -302,6 +342,16 @@ function httpRequestHelper(
       req.end();
     }
   });
+}
+
+/**
+ * Delay for a fixed number of seconds.
+ *
+ * @param {number} seconds The amount of time to delay
+ * @return {!Promise}
+ */
+function delay(seconds) {
+  return new Promise((resolve) => setTimeout(resolve, seconds * 1000));
 }
 
 /**
