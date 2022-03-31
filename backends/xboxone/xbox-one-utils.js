@@ -220,16 +220,16 @@ async function launchApp(log, xboxOneAddress, username, password) {
       }
 
       if (xboxError.ErrorCode == ERROR_INSTALL_REGISTRATION_FAILURE) {
-        log.error('Launch failure (ERROR_INSTALL_REGISTRATION_FAILURE).');
+        log.debug('Launch failure (ERROR_INSTALL_REGISTRATION_FAILURE).');
         if (i == numLaunchRetries - 1) {
           // No more retries.
           throw error;
         }
 
-        log.error('Retrying after delay.');
+        log.debug('Retrying after delay.');
         await delay(launchRetryDelay);
 
-        log.error('Retrying launch.');
+        log.debug('Retrying launch.');
       } else {
         // A different error than the one we handle automatically.
         throw error;
