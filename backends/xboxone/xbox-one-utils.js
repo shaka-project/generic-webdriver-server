@@ -215,7 +215,9 @@ async function launchApp(log, xboxOneAddress, username, password) {
       let xboxError = {};
       try {
         xboxError = JSON.parse(error.body);
-      } catch (jsonError) {} // ignored
+      } catch (jsonError) {
+        // JSON parsing errors are ignored.
+      }
 
       if (xboxError.ErrorCode == ERROR_INSTALL_REGISTRATION_FAILURE) {
         log.error('Launch failure (ERROR_INSTALL_REGISTRATION_FAILURE).');
@@ -345,7 +347,7 @@ function httpRequestHelper(
 /**
  * Delay for a fixed number of seconds.
  *
- * @param {number} seconds
+ * @param {number} seconds The amount of time to delay
  * @return {!Promise}
  */
 function delay(seconds) {
