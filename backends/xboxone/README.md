@@ -52,6 +52,16 @@ To use these tools, you will need:
       `Create new`.
    2. Follow the prompts to sign in.
 
+4. Enable instant sign-in.  Without a signed-in account, WebView won't run.
+   Without instant sign-in, you would have to manually sign in after each OS
+   update or reboot.
+
+  1. From dev home, click `Settings`, then `Launch Settings`.
+  2. Click `Sign-in, security & passkey`.
+  3. If not already signed in, choose your test account from the list.
+  4. Click `Instant sign-in`.
+  5. Click `Use instant sign-in`.
+
 [Microsoft's official docs on dev mode]: https://docs.microsoft.com/en-us/windows/uwp/xbox-apps/devkit-activation
 [alternate method for dev mode setup]: https://docs.microsoft.com/en-us/answers/questions/81169/almost-there-trying-activate-dev-console.html
 
