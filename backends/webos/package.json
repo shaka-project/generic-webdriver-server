@@ -1,0 +1,43 @@
+{
+  "name": "webos-webdriver-server",
+  "description": "A webOS WebDriver server that pushes URLs to webOS devices, built on generic-webdriver-server.",
+  "version": "1.0.0",
+  "homepage": "https://github.com/shaka-project/generic-webdriver-server",
+  "author": "Google",
+  "license": "Apache-2.0",
+  "maintainers": [
+    {
+      "name": "Joey Parrish",
+      "email": "joeyparrish@google.com"
+    },
+    {
+      "name": "Ömer Hattapoğlu",
+      "email": "omerhattapoglu1@gmail.com"
+    }
+  ],
+  "keywords": [
+    "karma",
+    "selenium",
+    "webos",
+    "webdriver"
+  ],
+  "main": "webos-webdriver-server.js",
+  "scripts": {
+    "lint": "eslint --ignore-path ../../.gitignore --max-warnings 0 .",
+    "checkClean": "test -z \"$(git status --short .)\" || (echo \"Git not clean!\"; git status .; exit 1)",
+    "test": "npm run lint",
+    "prepack": "npm run lint && npm run checkClean"
+  },
+  "bin": {
+    "webos-webdriver-cli": "./webos-webdriver-cli.js",
+    "webos-webdriver-server": "./webos-webdriver-server.js"
+  },
+  "dependencies": {
+    "generic-webdriver-server": "^1.1.3",
+    "tmp-promise": "^3.0.2",
+    "wol": "^1.0.7"
+  },
+  "workspaces": [
+    "../../base"
+  ]
+}
