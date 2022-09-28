@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.3](https://github.com/shaka-project/generic-webdriver-server/compare/tizen-webdriver-server-v1.1.2...tizen-webdriver-server-v1.1.3) (2022-09-28)
+
+
+### Bug Fixes
+
+* **tizen:** Fix Docker host permissions ([#52](https://github.com/shaka-project/generic-webdriver-server/issues/52)) ([92f5311](https://github.com/shaka-project/generic-webdriver-server/commit/92f5311c40de85c3e9e21a4c391511b9679bf687))
+
 ### [1.1.2](https://github.com/shaka-project/generic-webdriver-server/compare/tizen-webdriver-server-v1.1.1...tizen-webdriver-server-v1.1.2) (2022-02-07)
 
 Bump dependencies to resolve DoS issues in indirect dependencies.
