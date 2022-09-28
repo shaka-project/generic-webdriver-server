@@ -121,7 +121,9 @@ async function loadOnTizen(flags, log, url) {
     // image by default.  Rather than require extra configuration, copy the app
     // template into a temporary directory first.
     const tmpDirOptions = {
-      mode: 0o700,  // Only accessible to the owner
+      // Because the container's user ID may not match the host user ID, we need
+      // the temp folder to be world-readable.
+      mode: 0o755,
       prefix: 'tizen-webdriver-server-',
       unsafeCleanup: true,  // Remove directory contents on cleanup
     };
