@@ -18,22 +18,29 @@
 const castv2 = require('castv2');
 
 const HOME_SCREEN_APP_ID = 'E8C28D3C';
+const SERIAL_NUMBER_APP_ID = '39B1F81E';
 
 // Makes it more obvious why we multiply timeouts by 1000 for setTimeout.
 const MILLISECONDS_PER_SECOND = 1000;
 
+const Mode = {
+  HOME: 0,
+  URL: 1,
+  SERIAL_NUMBER: 2,
+};
+
 /**
- * Uses the Cast v2 protocol to connect to a Chromecast device and start our
+ * Uses the Cast v2 protocol to connect to a Chromecast device and start a
  * receiver app or close the running app and go back to the Chromecast home
  * screen.
  *
  * @param {!object<string, ?>} flags Parsed command-line flags.
  * @param {Console} log A Console-like interface for logging.  Can be "console".
- * @param {?string} url If non-null, open the receiver app and load the URL
- *   into it.  If null, send the Chromecast device back to the home screen.
+ * @param {Mode} mode A Mode constant, such as Mode.HOME or Mode.URL.
+ * @param {?string} url Required for Mode.URL, ignored otherwise.
  * @return {!Promise}
  */
-function cast(flags, log, url) {
+function cast(flags, log, mode, url) {
   return new Promise((resolve, reject) => {
     // Hostname is in one of the following forms:
     //   "hostname-or-ip"
@@ -78,18 +85,26 @@ function cast(flags, log, url) {
         requestId: 1,
       };
 
-      // Launch the receiver if a URL is given, or stop whatever is running
-      // otherwise.
-      if (url) {
-        request.type = 'LAUNCH';
-        request.appId = flags.receiverAppId;
+      switch (mode) {
+        case Mode.URL:
+          request.type = 'LAUNCH';
+          request.appId = flags.receiverAppId;
+          // This is substituted in place of ${POST_DATA} in the registered
+          // receiver URL.
+          request.commandParameters = url;
+          break;
 
-        // This is substituted in place of ${POST_DATA} in the registered
-        // receiver URL.
-        request.commandParameters = url;
-      } else {
-        request.type = 'STOP';
+        case Mode.SERIAL_NUMBER:
+          request.type = 'LAUNCH';
+          request.appId = SERIAL_NUMBER_APP_ID;
+          break;
+
+        case Mode.HOME:
+        default:
+          request.type = 'STOP';
+          break;
       }
+
       receiver.send(request);
 
       // Set up a timeout.
@@ -106,12 +121,13 @@ function cast(flags, log, url) {
           appIds = data.status.applications.map((app) => app.appId);
         }
 
-        if (url && appIds.includes(flags.receiverAppId)) {
-          // The requested URL is being displayed.
+        if (request.type == 'LAUNCH' && appIds.includes(request.appId)) {
+          // The request was fulfilled.
           log.info('Cast successful.');
           clearTimeout(connectionTimer);
           resolve();
-        } else if (!url && appIds.includes(HOME_SCREEN_APP_ID)) {
+        } else if (request.type == 'STOP' &&
+            appIds.includes(HOME_SCREEN_APP_ID)) {
           // The home screen is showing.
           log.info('Return to home screen successful.');
           clearTimeout(connectionTimer);
@@ -159,6 +175,7 @@ function addChromecastArgs(yargs) {
 }
 
 module.exports = {
+  Mode,
   cast,
   addChromecastArgs,
 };
