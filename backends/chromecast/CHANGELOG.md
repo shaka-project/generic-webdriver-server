@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/shaka-project/generic-webdriver-server/compare/chromecast-webdriver-server-v1.0.4...chromecast-webdriver-server-v1.1.0) (2022-10-25)
+
+
+### Features
+
+* Instruct Chromecasts to show their serial numbers ([#55](https://github.com/shaka-project/generic-webdriver-server/issues/55)) ([dca2613](https://github.com/shaka-project/generic-webdriver-server/commit/dca2613bca83de4f7d70737d32f41010887a7629))
+
 ### [1.0.4](https://github.com/shaka-project/generic-webdriver-server/compare/chromecast-webdriver-server-v1.0.3...chromecast-webdriver-server-v1.0.4) (2022-02-07)
 
 Bump dependencies to resolve DoS issues in indirect dependencies.
