@@ -17,30 +17,39 @@
 
 
 const yargs = require('yargs');
-const {cast, addChromecastArgs} = require('./cast-utils');
+const {Mode, cast, addChromecastArgs} = require('./cast-utils');
 
 yargs
     .strict()
     .usage('Usage: $0 --hostname=<HOSTNAME> --url=<URL>')
-    .usage('   or: $0 --hostname=<HOSTNAME> --home')
+    .usage('-or-:  $0 --hostname=<HOSTNAME> --home')
+    .usage('-or-:  $0 --hostname=<HOSTNAME> --show-serial')
     .option('url', {
       description:
           'A URL to direct the Chromecast to.\n' +
-          'Either --url or --home must be specified.',
+          'Either --url, --home, or --show-serial must be specified.',
       type: 'string',
     })
     .option('home', {
       description:
           'Direct the Chromecast to the home screen.\n' +
-          'Either --url or --home must be specified.',
+          'Either --url, --home, or --show-serial must be specified.',
+      type: 'boolean',
+    })
+    .option('show-serial', {
+      description:
+          'Show the serial number of the Chromecast on the screen\n' +
+          'and speak it aloud (useful for audio-only devices).\n' +
+          'Either --url, --home, or --show-serial must be specified.',
       type: 'boolean',
     })
     // You can't use both at once.
-    .conflicts('url', 'home')
+    .conflicts('url', 'home', 'show-serial')
     .check((flags) => {
-      // Enforce that one or the other is specified.
-      if (!flags.url && !flags.home) {
-        throw new Error('Either --url or --home must be specified.');
+      // Enforce that one mode is required.
+      if (!flags.url && !flags.home && !flags.showSerial) {
+        throw new Error(
+            'Either --url, --home, or --show-serial must be specified.');
       }
 
       return true;
@@ -50,4 +59,11 @@ addChromecastArgs(yargs);
 
 const flags = yargs.argv;
 
-cast(flags, /* log= */ console, flags.url);
+let mode = Mode.HOME;
+if (flags.url) {
+  mode = Mode.URL;
+} else if (flags.showSerial) {
+  mode = Mode.SERIAL_NUMBER;
+}
+
+cast(flags, /* log= */ console, mode, flags.url);

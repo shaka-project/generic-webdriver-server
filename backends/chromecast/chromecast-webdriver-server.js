@@ -20,7 +20,7 @@ const {
   yargs,
 } = require('generic-webdriver-server');
 
-const {cast, addChromecastArgs} = require('./cast-utils');
+const {Mode, cast, addChromecastArgs} = require('./cast-utils');
 
 /** WebDriver server backend for Chromecast */
 class ChromecastWebDriverServer extends GenericSingleSessionWebDriverServer {
@@ -30,13 +30,13 @@ class ChromecastWebDriverServer extends GenericSingleSessionWebDriverServer {
 
   /** @override */
   async navigateToSingleSession(url) {
-    await cast(this.flags, this.log, url);
+    await cast(this.flags, this.log, Mode.URL, url);
   }
 
   /** @override */
   async closeSingleSession() {
     // Send the device back to the home screen.
-    await cast(this.flags, this.log, null);
+    await cast(this.flags, this.log, Mode.HOME);
   }
 }
 
