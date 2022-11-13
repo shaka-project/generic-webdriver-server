@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.4](https://github.com/shaka-project/generic-webdriver-server/compare/tizen-webdriver-server-v1.1.3...tizen-webdriver-server-v1.1.4) (2022-11-13)
+
+
+### Bug Fixes
+
+* Fix Tizen cert issues in Docker image ([#59](https://github.com/shaka-project/generic-webdriver-server/issues/59)) ([81a4bd0](https://github.com/shaka-project/generic-webdriver-server/commit/81a4bd0f76d66b9e0b62b297cd6377b3e1288ce0)), closes [#57](https://github.com/shaka-project/generic-webdriver-server/issues/57)
+
 ## [1.1.3](https://github.com/shaka-project/generic-webdriver-server/compare/tizen-webdriver-server-v1.1.2...tizen-webdriver-server-v1.1.3) (2022-09-28)
 
 
