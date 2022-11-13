@@ -11,8 +11,8 @@ MAINTAINER joeyparrish <joeyparrish@google.com>
 # Then clear the apt cache to reduce the size of the final image.
 # Docker's best practices guide recommends that these all be combined into one
 # step to avoid issues with the caching system.
-RUN apt-get -y update \
-&& apt-get -y install --no-install-recommends \
+RUN apt-get -y update
+RUN apt-get -y install --no-install-recommends \
   ca-certificates \
   cpio \
   gettext \
@@ -25,10 +25,8 @@ RUN apt-get -y update \
   sudo \
   unzip \
   wget \
-  zip \
-&& apt-get -y clean \
-&& rm -rf /var/lib/apt/lists/* \
-&& rm -rf /etc/apt/sources.list.d/*
+  zip
+RUN apt-get -y clean && rm -rf /var/lib/apt/lists/* && rm -rf /etc/apt/sources.list.d/*
 
 # Add a non-root user with sudo access.
 RUN groupadd -r tizen \
@@ -43,7 +41,7 @@ USER tizen
 WORKDIR /home/tizen
 
 # Download the Tizen Studio installer.
-ARG TIZEN_STUDIO_VERSION=3.7
+ARG TIZEN_STUDIO_VERSION=5.0
 ARG TIZEN_STUDIO_DL_FOLDER=http://download.tizen.org/sdk/Installer/tizen-studio_${TIZEN_STUDIO_VERSION}
 ARG TIZEN_STUDIO_BINARY=web-cli_Tizen_Studio_${TIZEN_STUDIO_VERSION}_ubuntu-64.bin
 RUN wget ${TIZEN_STUDIO_DL_FOLDER}/${TIZEN_STUDIO_BINARY} \
