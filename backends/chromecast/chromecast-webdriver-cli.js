@@ -43,8 +43,10 @@ yargs
           'Either --url, --home, or --show-serial must be specified.',
       type: 'boolean',
     })
-    // You can't use both at once.
-    .conflicts('url', 'home', 'show-serial')
+    // You can't use more than one of these at once.
+    .conflicts('url', 'home')
+    .conflicts('home', 'show-serial')
+    .conflicts('url', 'show-serial')
     .check((flags) => {
       // Enforce that one mode is required.
       if (!flags.url && !flags.home && !flags.showSerial) {
