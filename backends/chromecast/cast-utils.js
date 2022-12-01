@@ -91,7 +91,10 @@ function cast(flags, log, mode, url) {
           request.appId = flags.receiverAppId;
           // This is substituted in place of ${POST_DATA} in the registered
           // receiver URL.
-          request.commandParameters = url;
+          request.commandParameters = JSON.stringify({
+            url,
+            forceSameOrigin: flags.forceSameOrigin,
+          });
           break;
 
         case Mode.SERIAL_NUMBER:
@@ -171,6 +174,13 @@ function addChromecastArgs(yargs) {
         description: 'A timeout for the Chromecast connection',
         type: 'number',
         default: 30,
+      })
+      .option('force-same-origin', {
+        description: 'If true (default), force content to be loaded in the ' +
+                     'same origin as the receiver app, so that cast platform ' +
+                     'APIs can be made available.  This may break some pages.',
+        type: 'boolean',
+        default: true,
       });
 }
 

@@ -37,10 +37,22 @@ iframe {
     </style>
     <script>
 
-window.addEventListener('DOMContentLoaded', () => {
-  // Ignore the leading '?'.  The rest is the URL.
-  const frameUrl = (location.search + location.hash).substr(1);
+window.addEventListener('DOMContentLoaded', async () => {
+  // In v1.0, the location contained only a URL.
+  // In v1.1+, the location contains JSON data.
+  // This receiver is backward compatible with older clients.
+  let parameters;
+  try {
+    // Ignore the leading '?'.  The rest is JSON data.
+    parameters = JSON.parse(decodeURI(location.search.substr(1)));
+  } catch (error) {
+    parameters = {
+      // Ignore the leading '?'.  The rest is a URL.
+      url: (location.search + location.hash).substr(1),
+    };
+  }
 
+  const frameUrl = parameters.url;
   const statusText = 'URL: ' + frameUrl;
 
   const context = cast.framework.CastReceiverContext.getInstance();
@@ -62,7 +74,30 @@ window.addEventListener('DOMContentLoaded', () => {
   ];
 
   window.frame.allow = allowedFeatures.join('; ');
-  window.frame.src = frameUrl;
+
+  if (parameters.forceSameOrigin) {
+    // Dynamically load the frame URL's contents.  We then modify the contents
+    // to fix relative links and expose the Cast platform APIs.
+    const response = await fetch(frameUrl);
+    let text = await response.text();
+
+    // Makes sure relative links will still work in the document.
+    const baseElement = `<base href="${frameUrl}">`;
+
+    // Pulls the top-level cast platform methods down into the iframe.
+    const pullCast = 'cast.__platform__ = window.top.cast.__platform__;';
+    const scriptElement = `<script>${pullCast}<\/script>`;
+
+    // Inject these features into the page source.
+    text = text.replace(/(<head\s?[^>]*>)/, `$1${baseElement}${scriptElement}`);
+
+    // Load the document as text, so that it is in the same origin as this
+    // receiver.  That allows the test iframe to access the top-level
+    // cast.__platform__.
+    window.frame.srcdoc = text;
+  } else {
+    window.frame.src = frameUrl;
+  }
 });
 
     </script>

@@ -44,6 +44,9 @@ This backend supports the following parameters:
    be closed.
  - `connection-timeout-seconds`: The connection timeout for the Chromecast,
    after which the corresponding WebDriver operation will fail.
+ - `force-same-origin`: If true (default), force content to be loaded in the
+   same origin as the receiver app, so that cast platform APIs can be made
+   available.  This may break some pages.
 
 
 ## Chromecast receiver deployment
