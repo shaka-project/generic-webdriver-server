@@ -1,0 +1,8 @@
+# These are static binary dependencies used to build our Java jar.  They do not
+# change (since Selenium v3 is no longer in development), and are taken
+# directly from Selenium.  base/java/third_party/SOURCES.txt documents their
+# origin and license.
+ignorePaths:
+ - base/java/third_party/selenium-server-standalone-3.141.59.jar
+ - base/java/third_party/auto-common-0.8.jar
+ - base/java/third_party/auto-service-1.0-rc4.jar
