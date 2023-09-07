@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/shaka-project/generic-webdriver-server/compare/chromecast-webdriver-server-v1.1.0...chromecast-webdriver-server-v1.1.1) (2023-09-07)
+
+
+### Bug Fixes
+
+* Fix yargs compatibility ([#61](https://github.com/shaka-project/generic-webdriver-server/issues/61)) ([3d44c2d](https://github.com/shaka-project/generic-webdriver-server/commit/3d44c2d52e5b992d220323b425b1d6229bc3675b))
+
 ## [1.1.0](https://github.com/shaka-project/generic-webdriver-server/compare/chromecast-webdriver-server-v1.0.4...chromecast-webdriver-server-v1.1.0) (2022-10-25)
 
 
