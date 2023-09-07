@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.5](https://github.com/shaka-project/generic-webdriver-server/compare/generic-webdriver-server-v1.1.4...generic-webdriver-server-v1.1.5) (2023-09-07)
+
+
+### Bug Fixes
+
+* Override allstar settings for binaries ([#68](https://github.com/shaka-project/generic-webdriver-server/issues/68)) ([73bae14](https://github.com/shaka-project/generic-webdriver-server/commit/73bae14ae4cc51984533e6c0e04ec060089bdb81)), closes [#67](https://github.com/shaka-project/generic-webdriver-server/issues/67)
+
 ### [1.1.4](https://github.com/shaka-project/generic-webdriver-server/compare/generic-webdriver-server-v1.1.3...generic-webdriver-server-v1.1.4) (2022-03-30)
 
 
