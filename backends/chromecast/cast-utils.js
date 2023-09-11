@@ -116,18 +116,24 @@ function cast(flags, log, mode, url) {
       receiver.on('message', (data, broadcast) => {
         // Certain messages may contain a list of running apps.
         // Look for those to indicate a change in what's running.
-        let appIds = [];
-        if (data.type == 'RECEIVER_STATUS' && data.status.applications) {
-          appIds = data.status.applications.map((app) => app.appId);
+        let appLaunched = false;
+        let homeLaunched = false;
+        if (data.type == 'RECEIVER_STATUS') {
+          const applications = data.status.applications || [];
+          const appIds = applications.map((app) => app.appId);
+          appLaunched = appIds.includes(request.appId);
+          // On traditional Cast devices, there's a home screen app to run.
+          // On the new Google Pixel tablet (2013), the list becomes empty.
+          homeLaunched = appIds.includes(HOME_SCREEN_APP_ID) ||
+                         appIds.length == 0;
         }
 
-        if (request.type == 'LAUNCH' && appIds.includes(request.appId)) {
+        if (request.type == 'LAUNCH' && appLaunched) {
           // The request was fulfilled.
           log.info('Cast successful.');
           clearTimeout(connectionTimer);
           resolve();
-        } else if (request.type == 'STOP' &&
-            appIds.includes(HOME_SCREEN_APP_ID)) {
+        } else if (request.type == 'STOP' && homeLaunched) {
           // The home screen is showing.
           log.info('Return to home screen successful.');
           clearTimeout(connectionTimer);
@@ -138,6 +144,12 @@ function cast(flags, log, mode, url) {
         } else if (data.type == 'RECEIVER_STATUS' && data.status.volume) {
           // Ignore updates on audio volume.  These occur frequently, are not
           // useful, and should not be logged below.
+        } else if (data.type == 'LAUNCH_STATUS' &&
+                   data.status == 'USER_PENDING_AUTHORIZATION') {
+          log.info('Waiting for user authorization to run the receiver...');
+        } else if (data.type == 'LAUNCH_STATUS' &&
+                   data.status == 'USER_ALLOWED') {
+          // Ignore this.  The user already allowed us to launch this app.
         } else {
           // TODO: are there other common errors we need to check for?
           log.debug('Unrecognized data from castv2:', data);
