@@ -123,7 +123,7 @@ function cast(flags, log, mode, url) {
           const appIds = applications.map((app) => app.appId);
           appLaunched = appIds.includes(request.appId);
           // On traditional Cast devices, there's a home screen app to run.
-          // On the new Google Pixel tablet (2013), the list becomes empty.
+          // On the new Google Pixel tablet (2023), the list becomes empty.
           homeLaunched = appIds.includes(HOME_SCREEN_APP_ID) ||
                          appIds.length == 0;
         }
