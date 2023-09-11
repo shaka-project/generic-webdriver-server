@@ -149,7 +149,9 @@ function cast(flags, log, mode, url) {
           log.info('Waiting for user authorization to run the receiver...');
         } else if (data.type == 'LAUNCH_STATUS' &&
                    data.status == 'USER_ALLOWED') {
-          // Ignore this.  The user already allowed us to launch this app.
+          // This occurs when the user has chosen "always allow" for a previous
+          // launch.  The launch is happening, and there is no need to log this
+          // status.
         } else {
           // TODO: are there other common errors we need to check for?
           log.debug('Unrecognized data from castv2:', data);
