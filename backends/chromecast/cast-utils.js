@@ -132,11 +132,13 @@ function cast(flags, log, mode, url) {
           // The request was fulfilled.
           log.info('Cast successful.');
           clearTimeout(connectionTimer);
+          client.close();
           resolve();
         } else if (request.type == 'STOP' && homeLaunched) {
           // The home screen is showing.
           log.info('Return to home screen successful.');
           clearTimeout(connectionTimer);
+          client.close();
           resolve();
         } else if (data.type == 'LAUNCH_ERROR') {
           const message = 'Failed to launch receiver!  Reason: ' + data.reason;
