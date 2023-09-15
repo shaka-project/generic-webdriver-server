@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.0](https://github.com/shaka-project/generic-webdriver-server/compare/chromecast-webdriver-server-v1.1.1...chromecast-webdriver-server-v1.2.0) (2023-09-15)
+
+
+### Features
+
+* **chromecast:** Support Google Pixel Tablet ([#77](https://github.com/shaka-project/generic-webdriver-server/issues/77)) ([6cf553e](https://github.com/shaka-project/generic-webdriver-server/commit/6cf553ed90fd7c4fe73e7faba2be295455eaeb8a))
+
+
+### Bug Fixes
+
+* **chromecast:** Speed up shutdown ([#78](https://github.com/shaka-project/generic-webdriver-server/issues/78)) ([89f4146](https://github.com/shaka-project/generic-webdriver-server/commit/89f4146d599bda3e93ac83a2d45c1dcb2da6a4e8))
+
 ## [1.1.1](https://github.com/shaka-project/generic-webdriver-server/compare/chromecast-webdriver-server-v1.1.0...chromecast-webdriver-server-v1.1.1) (2023-09-07)
 
 
