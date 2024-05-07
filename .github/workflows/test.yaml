@@ -12,7 +12,9 @@ jobs:
       matrix:
         # Oldest supported LTS version through current LTS
         node-version: [12.x, 14.x, 16.x]
-        os: [macOS-latest, windows-latest, ubuntu-latest]
+        # NOTE: Old versions aren't available for mac-arm64, so we use macos-13
+        # (the last CI image based on x64 hardware)
+        os: [macos-13, windows-latest, ubuntu-latest]
       fail-fast: false
 
     steps:
