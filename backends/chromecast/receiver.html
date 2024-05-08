@@ -37,6 +37,44 @@ iframe {
     </style>
     <script>
 
+// Expose cast.__platform__ asynchronously through postMessage.
+// Cannot be used to proxy synchronous calls, but could be used for debugging
+// or with an async shim and `await` on all calls from the client.
+window.addEventListener('message', (event) => {
+  const data = event.data;
+  console.log('Top window received message:', data);
+
+  if (data.type == 'cast.__platform__') {
+    const platform = cast.__platform__;
+    const command = platform[data.command];
+
+    const args = data.args;
+    try {
+      const result = command.apply(platform, args);
+
+      const message = {
+        id: data.id,
+        type: data.type + ':result',
+        result: result,
+      };
+
+      console.log('Top window sending result:', message);
+      event.source.postMessage(message, '*');
+    } catch (error) {
+      console.log('Failed:', error);
+
+      const message = {
+        id: data.id,
+        type: data.type + ':error',
+        error: error.message,
+      };
+
+      console.log('Top window sending error:', message);
+      event.source.postMessage(message, '*');
+    }
+  }
+});
+
 window.addEventListener('DOMContentLoaded', () => {
   // Ignore the leading '?'.  The rest is the URL.
   const frameUrl = (location.search + location.hash).substr(1);
