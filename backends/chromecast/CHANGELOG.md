@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/shaka-project/generic-webdriver-server/compare/chromecast-webdriver-server-v1.2.0...chromecast-webdriver-server-v1.3.0) (2024-05-08)
+
+
+### Features
+
+* **chromecast:** Allow async access to `cast.__platform__` via postMessage ([#84](https://github.com/shaka-project/generic-webdriver-server/issues/84)) ([8475479](https://github.com/shaka-project/generic-webdriver-server/commit/8475479f665c182b9beb184ceffd46bddcc6f052))
+
 ## [1.2.0](https://github.com/shaka-project/generic-webdriver-server/compare/chromecast-webdriver-server-v1.1.1...chromecast-webdriver-server-v1.2.0) (2023-09-15)
 
 

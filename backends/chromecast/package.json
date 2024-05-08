@@ -1,7 +1,7 @@
 {
   "name": "chromecast-webdriver-server",
   "description": "A WebDriver server that pushes URLs to Chromecast, built on generic-webdriver-server.",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "homepage": "https://github.com/shaka-project/generic-webdriver-server",
   "author": "Google",
   "license": "Apache-2.0",
