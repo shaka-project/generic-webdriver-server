@@ -30,9 +30,10 @@
   },
   "dependencies": {
     "form-data": "^4.0.0",
-    "fs-extra": "^9.1.0",
-    "generic-webdriver-server": "^1.1.4",
-    "tmp-promise": "^3.0.2"
+    "fs-extra": "^11.2.0",
+    "generic-webdriver-server": "^1.1.5",
+    "tmp-promise": "^3.0.3",
+    "yargs": "^17.7.2"
   },
   "workspaces": [
     "../../base"
