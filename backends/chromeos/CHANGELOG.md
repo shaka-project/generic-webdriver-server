@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.3](https://github.com/shaka-project/generic-webdriver-server/compare/chromeos-webdriver-server-v1.0.2...chromeos-webdriver-server-v1.0.3) (2024-05-15)
+
+
+### Bug Fixes
+
+* **chromeos:** Fix compatibility with new deps and new ChromeOS ([#89](https://github.com/shaka-project/generic-webdriver-server/issues/89)) ([47c244e](https://github.com/shaka-project/generic-webdriver-server/commit/47c244ed2a74eb62183eaffe7a0f84fe95811f0f))
+* **chromeos:** Fix loading of node-fetch library ([#87](https://github.com/shaka-project/generic-webdriver-server/issues/87)) ([85b4ccf](https://github.com/shaka-project/generic-webdriver-server/commit/85b4ccfc2fa1a8f5af6fa678a0dcda0b1a2f4f0c))
+
 ### [1.0.2](https://github.com/shaka-project/generic-webdriver-server/compare/chromeos-webdriver-server-v1.0.1...chromeos-webdriver-server-v1.0.2) (2022-02-07)
 
 Bump dependencies to resolve DoS issues in indirect dependencies and a
