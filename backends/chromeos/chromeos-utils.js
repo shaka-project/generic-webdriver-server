@@ -22,7 +22,7 @@ const path = require('path');
 
 // A URL where the default SSH private key for dev-mode ChromeOS can be found.
 // The key is encoded in base64.
-const DEFAULT_PRIVATE_KEY_URL = 'https://chromium.googlesource.com/chromiumos/overlays/chromiumos-overlay/+/master/chromeos-base/chromeos-ssh-testkeys/files/testing_rsa?format=TEXT';
+const DEFAULT_PRIVATE_KEY_URL = 'https://chromium.googlesource.com/chromiumos/overlays/chromiumos-overlay/+/main/chromeos-base/chromeos-ssh-testkeys/files/testing_rsa?format=TEXT';
 
 // The default path where the ChromeOS private key will be read/stored.
 const DEFAULT_PRIVATE_KEY_PATH =
@@ -64,6 +64,7 @@ async function fetchPrivateKey(flags, log) {
       // decode it for us.
       const privateKeyBase64 = await response.text();
       fs.writeFileSync(flags.privateKey, privateKeyBase64, 'base64');
+      fs.chmodSync(flags.privateKey, 0o600);
     } else {
       log.error(`Private key not found at ${flags.privateKey} and ` +
                 `fetching disabled. See --fetch-private-key and ` +
@@ -98,7 +99,7 @@ async function connectAndPrepDevice(flags, log) {
       host,
       port,
       username: flags.username,
-      privateKey: flags.privateKey,
+      privateKeyPath: flags.privateKey,
     });
 
     log.debug(`Creating scripts folder ${DESTINATION_FOLDER}`);
@@ -109,7 +110,7 @@ async function connectAndPrepDevice(flags, log) {
     const transfers = [];
 
     for (const scriptName of SCRIPTS) {
-      const src = path.resolve(__dirname, scriptName);
+      const src = path.resolve(__dirname, 'scripts', scriptName);
       const dest = `${DESTINATION_FOLDER}/${scriptName}`;
 
       destinations.push(dest);
@@ -158,7 +159,9 @@ async function loadOnChromeOS(log, ssh, url, chromeArgs) {
     log.info(`Directing to ${url}`);
     // --kiosk is needed to avoid showing any existing tabs from a previous
     // session.
-    launchCommand.push('--kiosk', url);
+    launchCommand.push('--kiosk');
+    // Recent ChromeOS versions must specify the kiosk-mode URL with --app=...
+    launchCommand.push('--app=' + url);
   } else {
     log.info(`Opening previous session.`);
   }
@@ -200,8 +203,8 @@ async function executeRemoteCommand(log, ssh, argv) {
 
   const output = await ssh.exec(executable, args, options);
 
-  // output.code == null occurs with success, not code == 0.
-  if (output.code != null) {
+  // output.code == 0 means success.
+  if (output.code != 0) {
     log.error(`Remote command ${argv.join(' ')} ` +
               `failed with exit code ${output.code} ` +
               `and full output: ${output.stdout} ${output.stderr}`);
