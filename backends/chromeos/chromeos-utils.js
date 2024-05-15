@@ -204,7 +204,8 @@ async function executeRemoteCommand(log, ssh, argv) {
   const output = await ssh.exec(executable, args, options);
 
   // output.code == 0 or output.code == null means success.
-  if (output.code != 0 && output.code != null) {
+  const success = output.code == 0 || output.code == null;
+  if (!success) {
     log.error(`Remote command ${argv.join(' ')} ` +
               `failed with exit code ${output.code} ` +
               `and full output: ${output.stdout} ${output.stderr}`);
