@@ -43,15 +43,14 @@ WRAPPER_ARG="--chrome-command=$WRAPPER_PATH --extra-args=$EXTRA_ARGS_FILE"
 nohup /sbin/session_manager "$WRAPPER_ARG" </dev/null &>/dev/null &
 
 # If it's still running after 5 seconds, assume it's going to keep running.
-# This loop has an effective timeout of 5 seconds.
-for ((i = 0; i < 50; ++i)); do
+for ((i = 0; i < 5; ++i)); do
   if ! pidof session_manager &>/dev/null; then
     # pidof failed, meaning session_manager is no longer running.
     # Complain and fail the script.
     echo "* Failed to launch session manager!"
     exit 1
   fi
-  sleep 0.1
+  sleep 1
 done
 
 echo "* Launched!"
