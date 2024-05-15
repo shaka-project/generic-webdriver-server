@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.0.4](https://github.com/shaka-project/generic-webdriver-server/compare/chromeos-webdriver-server-v1.0.3...chromeos-webdriver-server-v1.0.4) (2024-05-15)
+
+
+### Bug Fixes
+
+* **chromeos:** Create private key folder if missing ([#90](https://github.com/shaka-project/generic-webdriver-server/issues/90)) ([f576b6c](https://github.com/shaka-project/generic-webdriver-server/commit/f576b6ccd9a80328af79257dda9ea6db0d0c94f2))
+* **chromeos:** Fix node-ssh exit code interpretation ([#92](https://github.com/shaka-project/generic-webdriver-server/issues/92)) ([aae4728](https://github.com/shaka-project/generic-webdriver-server/commit/aae472800db99e6f947e52a4c616ba5602934735))
+* **chromeos:** Fix session manager timing ([#91](https://github.com/shaka-project/generic-webdriver-server/issues/91)) ([c07311d](https://github.com/shaka-project/generic-webdriver-server/commit/c07311d936ac3efb3640a2300d74b3ac1421fe67))
+
 ## [1.0.3](https://github.com/shaka-project/generic-webdriver-server/compare/chromeos-webdriver-server-v1.0.2...chromeos-webdriver-server-v1.0.3) (2024-05-15)
 
 
