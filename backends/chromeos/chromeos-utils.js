@@ -61,8 +61,16 @@ async function fetchPrivateKey(flags, log) {
 
       const response = await fetch(flags.privateKeyUrl);
       // The URL gives us the key in base64, but we can have the fs module
-      // decode it for us.
+      // decode it for us in writeFileSync.
       const privateKeyBase64 = await response.text();
+
+      // If the folder doesn't exist, try to create it.
+      const privateKeyFolder = path.dirname(flags.privateKey);
+      if (!fs.existsSync(privateKeyFolder)) {
+        fs.mkdirSync(privateKeyFolder, {recursive: true});
+      }
+
+      // Write the file and set the permissions.
       fs.writeFileSync(flags.privateKey, privateKeyBase64, 'base64');
       fs.chmodSync(flags.privateKey, 0o600);
     } else {
