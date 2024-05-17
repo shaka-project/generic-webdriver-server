@@ -91,7 +91,10 @@ function cast(flags, log, mode, url) {
           request.appId = flags.receiverAppId;
           // This is substituted in place of ${POST_DATA} in the registered
           // receiver URL.
-          request.commandParameters = url;
+          request.commandParameters = JSON.stringify({
+            url,
+            redirect: flags.redirect,
+          });
           break;
 
         case Mode.SERIAL_NUMBER:
@@ -181,7 +184,14 @@ function addChromecastArgs(yargs) {
       .option('receiver-app-id', {
         description: 'The Chromecast receiver app ID',
         type: 'string',
-        default: 'B602D163',
+        default: '29993EC8',
+      })
+      .option('redirect', {
+        description:
+            'Use a redirect strategy instead of an iframe;' +
+            ' requires the Cast SDK to be loaded at the destination URL',
+        type: 'boolean',
+        default: false,
       })
       .option('connection-timeout-seconds', {
         description: 'A timeout for the Chromecast connection',

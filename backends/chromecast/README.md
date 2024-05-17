@@ -40,6 +40,8 @@ This backend supports the following parameters:
  - `receiver-app-id`: The receiver app ID to load, in case you want to host
    your own copy.  (See also
    [receiver-deployment.md](https://github.com/shaka-project/generic-webdriver-server/blob/main/backends/chromecast/receiver-deployment.md))
+ - `redirect`: Use a redirect strategy instead of an iframe; requires the Cast
+   SDK to be loaded at the destination URL.  Use this for Shaka Player testing.
  - `idle-timeout-seconds`: The timeout for idle sessions, after which they will
    be closed.
  - `connection-timeout-seconds`: The connection timeout for the Chromecast,
