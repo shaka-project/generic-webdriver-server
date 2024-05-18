@@ -17,8 +17,7 @@
 
 <html>
   <head>
-    <title>Chromecast WebDriver Receiver</title>
-    <script src="https://www.gstatic.com/cast/sdk/libs/caf_receiver/v3/cast_receiver_framework.js"></script>
+    <title>Chromecast WebDriver Receiver v2</title>
     <style>
 
 html, body, iframe {
@@ -37,75 +36,62 @@ iframe {
     </style>
     <script>
 
-// Expose cast.__platform__ asynchronously through postMessage.
-// Cannot be used to proxy synchronous calls, but could be used for debugging
-// or with an async shim and `await` on all calls from the client.
-window.addEventListener('message', (event) => {
-  const data = event.data;
-  console.log('Top window received message:', data);
-
-  if (data.type == 'cast.__platform__') {
-    const platform = cast.__platform__;
-    const command = platform[data.command];
-
-    const args = data.args;
-    try {
-      const result = command.apply(platform, args);
-
-      const message = {
-        id: data.id,
-        type: data.type + ':result',
-        result: result,
-      };
-
-      console.log('Top window sending result:', message);
-      event.source.postMessage(message, '*');
-    } catch (error) {
-      console.log('Failed:', error);
-
-      const message = {
-        id: data.id,
-        type: data.type + ':error',
-        error: error.message,
-      };
-
-      console.log('Top window sending error:', message);
-      event.source.postMessage(message, '*');
-    }
-  }
-});
-
 window.addEventListener('DOMContentLoaded', () => {
-  // Ignore the leading '?'.  The rest is the URL.
-  const frameUrl = (location.search + location.hash).substr(1);
+  // Arbitrary parameters encoded in JSON in the URL.
+  let parameters;
+  try {
+    // Ignore the leading '?'.  The rest is JSON data.
+    parameters = JSON.parse(decodeURI(location.search.substr(1)));
+  } catch (error) {
+    document.body.style.textAlign = 'center';
+    document.body.style.fontSize = '5vw';
+    document.body.style.marginTop = '2em';
+    document.body.innerText = 'FAILED TO DECODE JSON PARAMETERS';
+    return;
+  }
 
-  const statusText = 'URL: ' + frameUrl;
+  if (parameters.redirect) {
+    // The preferred method is to redirect, but this requires that the
+    // destination URL runs CAF.  If it doesn't, this receiver app will time
+    // out and fail.  This won't work for every URL, but will work for Shaka
+    // Player testing (v4.9+).  This gives a flat environment for testing, with
+    // direct access to things like EME and cast.__platform__.
+    location.href = parameters.url;
+  } else {
+    // For any other URL, we host the destination URL in an iframe and load CAF
+    // in this frame.
 
-  const context = cast.framework.CastReceiverContext.getInstance();
-  context.start({
-    statusText,
-    disableIdleTimeout: true,
-  });
+    const script = document.createElement('script');
+    script.src = 'https://www.gstatic.com/cast/sdk/libs/caf_receiver/v3/cast_receiver_framework.js';
+    script.onload = () => {
+      const statusText = 'URL: ' + parameters.url;
+      const context = cast.framework.CastReceiverContext.getInstance();
+      context.start({
+        statusText,
+        disableIdleTimeout: true,
+      });
+    };
+    document.head.appendChild(script);
 
-  // Some features must be explicitly allowed for an iframe.
-  // These are needed for media-related testing.
-  // TODO: Make this list configurable.
-  // See also: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Feature-Policy
-  const allowedFeatures = [
-    'autoplay',
-    'encrypted-media',
-    'fullscreen',
-    'picture-in-picture',
-    'sync-xhr',
-  ];
+    // Some features must be explicitly allowed for an iframe.
+    // These are needed for media-related testing.
+    // See also: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Feature-Policy
+    const allowedFeatures = [
+      'autoplay',
+      'encrypted-media',
+      'fullscreen',
+      'picture-in-picture',
+      'sync-xhr',
+    ];
 
-  window.frame.allow = allowedFeatures.join('; ');
-  window.frame.src = frameUrl;
+    const iframe = document.createElement('iframe');
+    iframe.allow = allowedFeatures.join('; ');
+    iframe.src = parameters.url;
+    document.body.appendChild(iframe);
+  }
 });
 
     </script>
   </head>
-  <body>
-    <iframe id="frame"></iframe>
-  </body>
+  <body></body>
 </html>

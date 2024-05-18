@@ -82,7 +82,7 @@ property:
 
 ```sh
 java \
-  -Dgenericwebdriver.backend.params.receiver-app-id=B602D163 \
+  -Dgenericwebdriver.backend.params.receiver-app-id=29993EC8 \
   # ...
 ```
 

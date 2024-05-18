@@ -16,7 +16,9 @@ Receiver apps are really just web pages, and everything on the screen is
 implemented in HTML, CSS, and JavaScript.
 
 The Chromecast WebDriver server's receiver app hosts an iframe which can be
-redirected to any URL at the client's request.  This is how we load the
+redirected to any URL at the client's request.  If the URL is known to load
+the Cast SDK, then the receiver app can also redirect to that URL instead,
+providing a frameless environment.  These are our two methods of loading an
 arbitrary URL requested by a test runner like [Karma][] without changing the
 receiver app's registered URL.
 
@@ -49,13 +51,18 @@ Source: https://developer.mozilla.org/en-US/docs/Web/HTTP/Feature_Policy
 
 ## Access Limitations
 
-We show an arbitrary URL on the device by embedding it into an iframe in our
-Chromecast receiver app.  However, sites can prevent iframe-embedding with the
-[`X-Frame-Options` header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options).
+We can show an arbitrary URL on the device by embedding it into an iframe in
+our Chromecast receiver app.  However, sites can prevent iframe-embedding with
+the [`X-Frame-Options` header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options).
 
 Though this should not be an issue for a test runner, this may affect other
 URLs.  Unfortunately, there is no way for the receiver app to detect when this
 has happened.  See: https://github.com/shaka-project/generic-webdriver-server/issues/8
+
+When possible, such as in Chromecast testing, you should use the `--redirect`
+flag and load the Cast SDK in your test environment.  This allows you to avoid
+the iframe and its limitations, and provides your tests with a flat environment
+more representative of your app's production environment.
 
 
 ## Chromecast receiver deployment
