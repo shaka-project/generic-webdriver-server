@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.0.0](https://github.com/shaka-project/generic-webdriver-server/compare/chromecast-webdriver-server-v1.3.0...chromecast-webdriver-server-v2.0.0) (2024-05-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* **chromecast:** Add v2 receiver app with a redirect mode ([#96](https://github.com/shaka-project/generic-webdriver-server/issues/96))
+* **chromecast:** Fork receiver app v1 ([#94](https://github.com/shaka-project/generic-webdriver-server/issues/94))
+
+### Features
+
+* **chromecast:** Add v2 receiver app with a redirect mode ([#96](https://github.com/shaka-project/generic-webdriver-server/issues/96)) ([5930d76](https://github.com/shaka-project/generic-webdriver-server/commit/5930d764693a0dc21f8a1c2304a694dd88ec2cf6))
+* **chromecast:** Fork receiver app v1 ([#94](https://github.com/shaka-project/generic-webdriver-server/issues/94)) ([a6a7998](https://github.com/shaka-project/generic-webdriver-server/commit/a6a79986a3ec853c1a5b5fd9b8a3e8f001861298))
+
 ## [1.3.0](https://github.com/shaka-project/generic-webdriver-server/compare/chromecast-webdriver-server-v1.2.0...chromecast-webdriver-server-v1.3.0) (2024-05-08)
 
 
