@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.5](https://github.com/shaka-project/generic-webdriver-server/compare/tizen-webdriver-server-v1.1.4...tizen-webdriver-server-v1.1.5) (2024-05-22)
+
+
+### Bug Fixes
+
+* **Tizen:** Allow detect screen resolution using ProductInfo API ([#97](https://github.com/shaka-project/generic-webdriver-server/issues/97)) ([7f79dfe](https://github.com/shaka-project/generic-webdriver-server/commit/7f79dfe1c2cdb86130f9b29e9aa32b982863cb1c))
+
 ## [1.1.4](https://github.com/shaka-project/generic-webdriver-server/compare/tizen-webdriver-server-v1.1.3...tizen-webdriver-server-v1.1.4) (2022-11-13)
 
 
