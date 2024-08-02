@@ -18,7 +18,7 @@ are used by the server, you may want to pre-fetch the image you'll be using.
 This command will fetch the default image:
 
 ```sh
-docker pull gcr.io/generic-webdriver-server/tizen-studio-tv-3.0
+docker pull ghcr.io/shaka-project/tizen-studio-tv-3.0
 ```
 
 

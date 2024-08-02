@@ -30,7 +30,7 @@ environment.
 
 We provide public Docker images containing a copy of Tizen Studio.  By default,
 Tizen WebDriver Server uses the image published at
-`gcr.io/generic-webdriver-server/tizen-studio-tv-3.0` to run Tizen Studio with
+`ghcr.io/shaka-project/tizen-studio-tv-3.0` to run Tizen Studio with
 the TV 3.0 SDK installed, but you can configure the server to use any arbitrary
 Docker image if you have your own.  See the option `tizen-studio-docker-image`.
 
@@ -46,10 +46,10 @@ If you don't have pre-existing Docker images for Tizen Studio, but you want to
 create a custom image anyway, you can base yours on ours.  We currently provide
 two images:
 
- - `gcr.io/generic-webdriver-server/tizen-studio`: A base image with Tizen
+ - `ghcr.io/shaka-project/tizen-studio`: A base image with Tizen
    Studio installed on top of a minimal Ubuntu environment, with no special
    SDKs installed.
- - `gcr.io/generic-webdriver-server/tizen-studio-tv-3.0`: Built on top of the
+ - `ghcr.io/shaka-project/tizen-studio-tv-3.0`: Built on top of the
    base image, and includes the TV 3.0 SDK.
 
 The source for these images can be found in

@@ -21,9 +21,9 @@ The Docker images are built using these commands before publishing them to the
 
 ```sh
 # The base image, containing Tizen Studio.
-docker build -t gcr.io/generic-webdriver-server/tizen-studio base/
+docker build -t ghcr.io/shaka-project/tizen-studio base/
 # An extension of the base image which also contains the Tizen TV 3.0 SDK.
-docker build -t gcr.io/generic-webdriver-server/tizen-studio-tv-3.0 tv-3.0/
+docker build -t ghcr.io/shaka-project/tizen-studio-tv-3.0 tv-3.0/
 ```
 
 ## Interactive use of Tizen Studio tools
@@ -34,7 +34,7 @@ variable.  Tizen Studio is installed in `~/tizen-studio`.
 
 ```sh
 # To get a shell in the Tizen Studio Docker image:
-docker run -it gcr.io/generic-webdriver-server/tizen-studio-tv-3.0
+docker run -it ghcr.io/shaka-project/tizen-studio-tv-3.0
 ```
 
 
@@ -44,7 +44,7 @@ The `sdb` tool's `connect` command starts a daemon in the background, so running
 that command alone will not work:
 
 ```sh
-docker run gcr.io/generic-webdriver-server/tizen-studio-tv-3.0 sdb connect mytv
+docker run ghcr.io/shaka-project/tizen-studio-tv-3.0 sdb connect mytv
 ```
 
 After the connection is established, the Docker image will shut down, and the
