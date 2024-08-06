@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/shaka-project/generic-webdriver-server/compare/tizen-webdriver-server-v1.1.5...tizen-webdriver-server-v2.0.0) (2024-08-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* **tizen:** Migrate Google Container Registry to GitHub Container Registry ([#99](https://github.com/shaka-project/generic-webdriver-server/issues/99))
+
+### Features
+
+* **tizen:** Migrate Google Container Registry to GitHub Container Registry ([#99](https://github.com/shaka-project/generic-webdriver-server/issues/99)) ([8c355ee](https://github.com/shaka-project/generic-webdriver-server/commit/8c355ee96224f87b2804df16d2064d44826d36b8))
+
 ## [1.1.5](https://github.com/shaka-project/generic-webdriver-server/compare/tizen-webdriver-server-v1.1.4...tizen-webdriver-server-v1.1.5) (2024-05-22)
 
 
