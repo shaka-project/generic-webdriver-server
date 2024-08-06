@@ -206,7 +206,7 @@ function addTizenArgs(yargs) {
             'For local Tizen Studio installations, use ' +
             '--local-tizen-studio.\n',
         type: 'string',
-        default: 'gcr.io/generic-webdriver-server/tizen-studio-tv-3.0:1.1.4',
+        default: 'ghcr.io/shaka-project/tizen-studio-tv-3.0:2.0.0',
       })
       .option('tizen-studio-path', {
         description:

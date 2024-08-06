@@ -5,7 +5,7 @@
 # be painful to install and configure.
 
 # Build on top of the generic tizen-studio package.
-FROM gcr.io/generic-webdriver-server/tizen-studio
+FROM ghcr.io/shaka-project/tizen-studio
 
 MAINTAINER joeyparrish <joeyparrish@google.com>
 
