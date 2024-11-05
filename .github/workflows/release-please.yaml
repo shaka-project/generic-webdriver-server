@@ -21,8 +21,10 @@ jobs:
           monorepo-tags: true
 
       - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: refs/tags/${{ steps.release.outputs.tag_name }}
         if: steps.release.outputs.releases_created
-        uses: actions/checkout@v2
 
       - name: Setup Node.js
         if: steps.release.outputs.releases_created
