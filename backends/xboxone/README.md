@@ -144,13 +144,13 @@ This backend supports the following parameters:
 
 ## How it works
 
-See [how-it-works.md](https://github.com/shaka-project/generic-webdriver-server/blob/main/backends/xbox-one/how-it-works.md)
+See [how-it-works.md](https://github.com/shaka-project/generic-webdriver-server/blob/main/backends/xboxone/how-it-works.md)
 for details.
 
 
 ## Tunneling to an Xbox One device on another network
 
-See [tunneling.md](https://github.com/shaka-project/generic-webdriver-server/blob/main/backends/xbox-one/tunneling.md)
+See [tunneling.md](https://github.com/shaka-project/generic-webdriver-server/blob/main/backends/xboxone/tunneling.md)
 for details.
 
 
