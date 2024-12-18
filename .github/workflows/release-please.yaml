@@ -24,6 +24,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: refs/tags/${{ steps.release.outputs.tag_name }}
+          persist-credentials: false
         if: steps.release.outputs.releases_created
 
       - name: Setup Node.js
