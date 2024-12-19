@@ -8,9 +8,16 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+
+    permissions:
+      # Write to "contents" is needed to create a release
+      contents: write
+      # Write to pull-requests is needed to create and update the release PR
+      pull-requests: write
+
     steps:
       # Create/update release PR
-      - uses: google-github-actions/release-please-action@v3
+      - uses: googleapis/release-please-action@v4
         id: release
         with:
           # These are the necessary parameters for releasing multiple packages
@@ -29,9 +36,9 @@ jobs:
 
       - name: Setup Node.js
         if: steps.release.outputs.releases_created
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 22
           registry-url: 'https://registry.npmjs.org'
 
       - name: Publish all changed packages
