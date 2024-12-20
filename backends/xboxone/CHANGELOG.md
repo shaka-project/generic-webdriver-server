@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.5](https://github.com/shaka-project/generic-webdriver-server/compare/xbox-one-webdriver-server-v1.0.4...xbox-one-webdriver-server-v1.0.5) (2024-12-20)
+
+
+### Bug Fixes
+
+* **docs:** Fix links in XboxOne readme ([#108](https://github.com/shaka-project/generic-webdriver-server/issues/108)) ([986f926](https://github.com/shaka-project/generic-webdriver-server/commit/986f926f972995ec60c50e46ed894a4c865f7bba))
+
 ### [1.0.4](https://github.com/shaka-project/generic-webdriver-server/compare/xbox-one-webdriver-server-v1.0.3...xbox-one-webdriver-server-v1.0.4) (2022-03-31)
 
 
