@@ -3,5 +3,5 @@
   "backends/chromecast": "2.0.0",
   "backends/chromeos": "1.0.4",
   "backends/tizen": "2.0.0",
-  "backends/xboxone": "1.0.4"
+  "backends/xboxone": "1.0.5"
 }
