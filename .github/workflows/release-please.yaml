@@ -8,6 +8,9 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    outputs:
+      paths_released: ${{ steps.release.outputs.paths_released }}
+      all_outputs: ${{ steps.bundle-outputs.outputs.all_outputs }}
 
     permissions:
       # Write to "contents" is needed to create a release
@@ -22,60 +25,114 @@ jobs:
         with:
           # These are the necessary parameters for releasing multiple packages
           # from a single repo.
-          command: manifest
-          config-file: .release-please-config.json
           manifest-file: .release-please-manifest.json
-          monorepo-tags: true
+          config-file: .release-please-config.json
+          include-component-in-tag: true
+
+      - name: Bundle release outputs
+        id: bundle-outputs
+        run: |
+          # Capture all outputs from release-please as JSON.
+          json='${{ toJSON(steps.release.outputs) }}'
+
+          # GITHUB_OUTPUT seems to get confused if there are newlines in the
+          # value, so compact it with jq.
+          json=$( echo "$json" | jq -c . )
+
+          # Write this string to the output
+          echo "all_outputs=$json" >> $GITHUB_OUTPUT
+
+          # And pretty-print it to the log
+          echo "$json" | jq .
+
+  npm:
+    runs-on: ubuntu-latest
+    needs: release
+    if: needs.release.outputs.paths_released != '[]'
+
+    permissions:
+      # Required for OIDC ("trusted publishing")
+      id-token: write
+
+    steps:
+      - name: Compute tag name
+        id: compute
+        run: |
+          # The output "tag_name" is only used for a root component, but we
+          # only release from subcomponents in this repo.  To get the tag name
+          # from a subcomponent, we need to check "paths_released", and use that
+          # to construct the key to the tag name.  This seems like a major
+          # failing of release-please-action, which could have a simple output
+          # with an arbitrary tag name for situations like this.
+          json='${{ needs.release.outputs.all_outputs }}'
+
+          # We don't care about every single tag.  We just care about one tag
+          # so we can check out the appropriate code from the repo.  So grab
+          # the first path.  Note that the paths_released field is itself a
+          # JSON-encoded string.
+          all_paths_json=$(echo "$json" | jq -r .paths_released)
+          echo "All released paths: $all_paths_json"
+
+          path=$(echo "$all_paths_json" | jq -r .[0])
+          echo "Chosen path for tag: $path"
+
+          tag_name=$(echo "$json" | jq -r ".[\"$path--tag_name\"]")
+          echo "Computed tag name for checkout: $tag_name"
+
+          echo "tag_name=$tag_name" >> $GITHUB_OUTPUT
 
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          ref: refs/tags/${{ steps.release.outputs.tag_name }}
+          ref: refs/tags/${{ steps.compute.outputs.tag_name }}
           persist-credentials: false
-        if: steps.release.outputs.releases_created
 
       - name: Setup Node.js
-        if: steps.release.outputs.releases_created
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          # NOTE: OIDC fails with node less than 24.
+          node-version: 24
           registry-url: 'https://registry.npmjs.org'
 
+      # NOTE: OIDC fails with npm less than 11.5.1.
+      - name: Update npm
+        run: sudo npm install -g npm@11.7
+
       - name: Publish all changed packages
-        if: steps.release.outputs.releases_created
         run: |
           npm ci
           npm --prefix base ci
 
-          for i in base backends/*; do
-            PACKAGE=$(jq -r .name < "$i"/package.json)
-            PRIVATE=$(jq -r .private < "$i"/package.json)
+          # Get a list of packages from the JSON output
+          json='${{ needs.release.outputs.all_outputs }}'
+          all_paths_json=$(echo "$json" | jq -r .paths_released)
+
+          echo "$all_paths_json" | jq -r .[] | while read path; do
+            PACKAGE=$(jq -r .name < "$path"/package.json)
+            PRIVATE=$(jq -r .private < "$path"/package.json)
 
             if [[ "$PRIVATE" == "true" ]]; then
-              echo "Skipping $i ($PACKAGE is private)"
+              echo "Skipping $path ($PACKAGE is private)"
               continue
             fi
 
-            SOURCE_VERSION=$(jq -r .version < "$i"/package.json)
+            SOURCE_VERSION=$(jq -r .version < "$path"/package.json)
             LAST_PUBLISHED=$(npm view "$PACKAGE" version 2>/dev/null)
-
-            if [[ "$LAST_PUBLISHED" == "$SOURCE_VERSION" ]]; then
-              echo "Skipping $i ($PACKAGE $SOURCE_VERSION is up-to-date)"
-              continue
-            fi
-
-            echo "Publishing $i ($PACKAGE $SOURCE_VERSION replacing $LAST_PUBLISHED)"
+            echo "Publishing $path ($PACKAGE $SOURCE_VERSION replacing $LAST_PUBLISHED)"
 
             # NOTE: Using npm --prefix _DOES NOT_ seem to work with publish
             # here.  So we use pushd/popd instead.
             set -e
-            pushd "$i"
+            pushd "$path"
 
             npm ci
-            npm publish
+
+            # NOTE: OIDC fails if the repository URL doesn't match package.json.
+            npm pkg set repository.url=https://github.com/${{ github.repository }}
+
+            # NOTE: --access public is required for scoped forks.
+            npm publish --access public
 
             popd
             set +e
           done
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
