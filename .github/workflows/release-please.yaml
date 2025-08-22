@@ -17,7 +17,7 @@ jobs:
 
     steps:
       # Create/update release PR
-      - uses: googleapis/release-please-action@v4
+      - uses: google-github-actions/release-please-action@v4
         id: release
         with:
           # These are the necessary parameters for releasing multiple packages
@@ -27,10 +27,32 @@ jobs:
           manifest-file: .release-please-manifest.json
           monorepo-tags: true
 
+      - name: Compute tag name
+        id: compute
+        if: steps.release.outputs.releases_created
+        run: |
+          # For a monorepo, there may be multiple tags, so outputs.tag_name is
+          # only used for releases of the root component.  To get the tag name
+          # generally, we need to check outputs.paths_released, and possibly
+          # use that to construct the tag name.  This seems like a major
+          # failing of release-please-action, which could have a simple output
+          # with an arbitrary tag name for situations like this.
+          json="${{ toJSON(steps.release.outputs) }}"
+          # This is a tag from the root component, if any.
+          tag_name=$(echo "$json" | jq -r .tag_name)
+          if [[ "$tag_name" == "" ]]; then
+            # We don't care about every single tag.  We just care about one tag
+            # so we can check out the appropriate code from the repo.  So grab
+            # path [0].
+            path=$(echo "$json" | jq -r .paths_released[0])
+            tag_name=$(echo "$json" | jq -r ".$path--tag_name")
+          fi
+          echo "tag_name=$tag_name" >> $GITHUB_OUTPUT
+
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          ref: refs/tags/${{ steps.release.outputs.tag_name }}
+          ref: refs/tags/${{ steps.compute.outputs.tag_name }}
           persist-credentials: false
         if: steps.release.outputs.releases_created
 
