@@ -15,10 +15,8 @@ jobs:
     strategy:
       matrix:
         # Oldest supported LTS version through current LTS
-        node-version: [18.x, 20.x, 22.x]
-        # NOTE: Old versions aren't available for mac-arm64, so we use macos-13
-        # (the last CI image based on x64 hardware)
-        os: [macos-13, windows-latest, ubuntu-latest]
+        node-version: [20.x, 22.x, 24.x, 26.x]
+        os: [macos-latest, macos-15-intel, windows-latest, ubuntu-latest]
       fail-fast: false
 
     steps:
@@ -36,7 +34,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      # Default Java on macos-13 seems to have an issue with building our jar
+      # Newer versions of Java can't build the old-Selenium-compatible jar
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
@@ -46,12 +44,6 @@ jobs:
       - name: Install deps
         shell: bash
         run: |
-          # npm v7+ (node v16+) has "workspaces" support, which is very useful
-          # for this project.  But since we're testing unmerged code on many
-          # older versions of node, we have to upgrade npm to a version that
-          # supports the workspace definitions in our package locks.
-          npm install -g npm@8
-
           # Install root level, shared dependencies, which are necessary for
           # eslint.
           npm ci
