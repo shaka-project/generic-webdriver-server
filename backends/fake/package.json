@@ -20,9 +20,7 @@
   "main": "fake-webdriver-server.js",
   "scripts": {
     "lint": "eslint --ignore-path ../../.gitignore --max-warnings 0 .",
-    "checkClean": "test -z \"$(git status --short .)\" || (echo \"Git not clean!\"; git status .; exit 1)",
-    "test": "npm run lint",
-    "prepack": "npm run lint && npm run checkClean"
+    "test": "npm run lint"
   },
   "bin": {
     "fake-webdriver-server": "./fake-webdriver-server.js"
