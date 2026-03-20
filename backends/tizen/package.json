@@ -20,7 +20,13 @@
   "main": "tizen-webdriver-server.js",
   "scripts": {
     "lint": "eslint --ignore-path ../../.gitignore --max-warnings 0 .",
-    "test": "npm run lint"
+    "test": "npm run lint && jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "bin": {
     "tizen-webdriver-cli": "./tizen-webdriver-cli.js",

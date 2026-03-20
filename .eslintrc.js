@@ -38,6 +38,17 @@ module.exports = {
       },
     },
   },
+  overrides: [
+    {
+      files: ['**/test/**/*.js'],
+      env: {jest: true},
+      rules: {
+        'jsdoc/require-jsdoc': 'off',
+        'jsdoc/require-description': 'off',
+      },
+    },
+  ],
+
   rules: {
     // Project-specific rules go here.
 
