@@ -41,5 +41,10 @@ class TizenWebDriverServer extends GenericSingleSessionWebDriverServer {
 }
 
 addTizenArgs(yargs);
-const server = new TizenWebDriverServer();
-server.listen();
+
+module.exports = {TizenWebDriverServer};
+
+if (require.main === module) {
+  const server = new TizenWebDriverServer();
+  server.listen();
+}
