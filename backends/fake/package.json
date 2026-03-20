@@ -20,7 +20,10 @@
   "main": "fake-webdriver-server.js",
   "scripts": {
     "lint": "eslint --ignore-path ../../.gitignore --max-warnings 0 .",
-    "test": "npm run lint"
+    "test": "jest"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "bin": {
     "fake-webdriver-server": "./fake-webdriver-server.js"
@@ -31,5 +34,9 @@
   },
   "workspaces": [
     "../../base"
-  ]
+  ],
+  "devDependencies": {
+    "jest": "^30.3.0",
+    "supertest": "^7.2.2"
+  }
 }

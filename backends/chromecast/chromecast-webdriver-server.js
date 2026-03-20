@@ -41,5 +41,10 @@ class ChromecastWebDriverServer extends GenericSingleSessionWebDriverServer {
 }
 
 addChromecastArgs(yargs);
-const server = new ChromecastWebDriverServer();
-server.listen();
+
+module.exports = {ChromecastWebDriverServer};
+
+if (require.main === module) {
+  const server = new ChromecastWebDriverServer();
+  server.listen();
+}
