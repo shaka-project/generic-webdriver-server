@@ -58,5 +58,10 @@ class XboxOneWebDriverServer extends GenericSingleSessionWebDriverServer {
 }
 
 addXboxOneArgs(yargs);
-const server = new XboxOneWebDriverServer();
-server.listen();
+
+module.exports = {XboxOneWebDriverServer};
+
+if (require.main === module) {
+  const server = new XboxOneWebDriverServer();
+  server.listen();
+}

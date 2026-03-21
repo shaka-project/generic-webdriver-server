@@ -68,5 +68,9 @@ class ChromeOSWebDriverServer extends GenericSingleSessionWebDriverServer {
 
 addChromeOSArgs(yargs);
 
-const server = new ChromeOSWebDriverServer();
-server.listen();
+module.exports = {ChromeOSWebDriverServer};
+
+if (require.main === module) {
+  const server = new ChromeOSWebDriverServer();
+  server.listen();
+}

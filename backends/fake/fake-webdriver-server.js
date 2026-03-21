@@ -107,5 +107,9 @@ yargs
       default: 'any old bar',
     });
 
-const server = new FakeWebDriverServer();
-server.listen();
+module.exports = {FakeWebDriverServer};
+
+if (require.main === module) {
+  const server = new FakeWebDriverServer();
+  server.listen();
+}

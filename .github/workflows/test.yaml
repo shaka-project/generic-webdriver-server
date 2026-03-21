@@ -42,16 +42,7 @@ jobs:
           java-version: 11
 
       - name: Install deps
-        shell: bash
-        run: |
-          # Install root level, shared dependencies, which are necessary for
-          # eslint.
-          npm ci
-
-          for i in base backends/*; do
-            # Install dependencies for each module.
-            npm --prefix "$i" ci
-          done
+        run: npm ci
 
       - name: Build Selenium DriverProvider JAR
         run: cd base && npm run jar
@@ -60,5 +51,5 @@ jobs:
         shell: bash
         run: |
           for i in base backends/*; do
-            npm --prefix "$i" test
+            (cd "$i" && npm test)
           done

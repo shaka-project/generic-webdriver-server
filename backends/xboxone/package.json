@@ -20,7 +20,13 @@
   "main": "xbox-one-webdriver-server.js",
   "scripts": {
     "lint": "eslint --ignore-path ../../.gitignore --max-warnings 0 .",
-    "test": "npm run lint"
+    "test": "npm run lint && jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "bin": {
     "xbox-one-webdriver-cli": "./xbox-one-webdriver-cli.js",
@@ -32,8 +38,5 @@
     "generic-webdriver-server": "^1.1.5",
     "tmp-promise": "^3.0.3",
     "yargs": "^17.7.2"
-  },
-  "workspaces": [
-    "../../base"
-  ]
+  }
 }
