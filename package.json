@@ -6,6 +6,10 @@
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-jsdoc": "^38.0.6"
   },
+  "workspaces": [
+    "base",
+    "backends/*"
+  ],
   "scripts": {
     "test": "for i in base backends/*; do (cd $i && npm test); done"
   }

@@ -33,9 +33,6 @@
     "node-ssh": "^13.2.0",
     "yargs": "^17.7.2"
   },
-  "workspaces": [
-    "../../base"
-  ],
   "devDependencies": {
     "jest": "^30.3.0",
     "supertest": "^7.2.2"

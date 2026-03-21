@@ -32,9 +32,6 @@
     "generic-webdriver-server": "^1.1.5",
     "yargs": "^17.7.2"
   },
-  "workspaces": [
-    "../../base"
-  ],
   "devDependencies": {
     "jest": "^30.3.0",
     "supertest": "^7.2.2"
