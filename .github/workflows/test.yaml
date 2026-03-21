@@ -48,8 +48,12 @@ jobs:
           # eslint.
           npm ci
 
-          for i in base backends/*; do
-            # Install dependencies for each module.
+          # Install backends before base.  Each backend declares base as a
+          # npm workspace member, and npm ci in workspace mode deletes and
+          # reinstalls all workspace members' node_modules without their
+          # devDependencies.  Installing base last ensures its devDependencies
+          # (jest, supertest) are present when tests run.
+          for i in backends/* base; do
             npm --prefix "$i" ci
           done
 
