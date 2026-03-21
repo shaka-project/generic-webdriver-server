@@ -60,5 +60,5 @@ jobs:
         shell: bash
         run: |
           for i in base backends/*; do
-            npm --prefix "$i" test
+            (cd "$i" && npm test)
           done
