@@ -50,7 +50,7 @@ jobs:
 
           for i in base backends/*; do
             # Install dependencies for each module.
-            (cd "$i" && npm ci)
+            (cd "$i" && npm install)
           done
 
       - name: Build Selenium DriverProvider JAR
