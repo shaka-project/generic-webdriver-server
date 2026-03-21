@@ -7,6 +7,6 @@
     "eslint-plugin-jsdoc": "^38.0.6"
   },
   "scripts": {
-    "test": "for i in base backends/*; do npm --prefix $i test; done"
+    "test": "for i in base backends/*; do (cd $i && npm test); done"
   }
 }
