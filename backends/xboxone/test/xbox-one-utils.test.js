@@ -37,8 +37,11 @@ const os = require('os');
 const https = require('https');
 
 // We test individual exported functions; loadOnXboxOne orchestrates the rest.
-const {checkPlatformRequirements, takeScreenshot} =
-    require('../xbox-one-utils');
+const {
+  ERROR_INSTALL_REGISTRATION_FAILURE,
+  checkPlatformRequirements,
+  takeScreenshot,
+} = require('../xbox-one-utils');
 
 // Also need setAppUrl and buildApp, which are not exported.
 // We test them indirectly through loadOnXboxOne, or test their effects.
@@ -293,7 +296,6 @@ describe('loadOnXboxOne()', () => {
     it('retries launch on ERROR_INSTALL_REGISTRATION_FAILURE', async () => {
       jest.useFakeTimers();
 
-      const ERROR_CODE = -2147009290;
       let launchAttempts = 0;
 
       // First POST for install returns 200, GET for state returns 200.
@@ -307,7 +309,7 @@ describe('loadOnXboxOne()', () => {
           launchAttempts++;
           if (launchAttempts === 1) {
             statusCode = 500;
-            body = JSON.stringify({ErrorCode: ERROR_CODE});
+            body = JSON.stringify({ErrorCode: ERROR_INSTALL_REGISTRATION_FAILURE});
           }
         }
 

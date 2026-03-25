@@ -24,6 +24,8 @@ const fs = require('fs');
 const path = require('path');
 
 const {
+  DEFAULT_SSH_PORT,
+  DESTINATION_FOLDER,
   fetchPrivateKey,
   connectAndPrepDevice,
   loadOnChromeOS,
@@ -136,7 +138,7 @@ describe('connectAndPrepDevice()', () => {
     await connectAndPrepDevice(defaultFlags, log);
 
     expect(mockSshInstance.connect).toHaveBeenCalledWith(
-        expect.objectContaining({host: '192.168.1.50', port: 22}));
+        expect.objectContaining({host: '192.168.1.50', port: DEFAULT_SSH_PORT}));
   });
 
   it('uses explicit port when specified in hostname', async () => {
@@ -161,7 +163,7 @@ describe('connectAndPrepDevice()', () => {
     await connectAndPrepDevice(defaultFlags, log);
 
     expect(mockSshInstance.exec).toHaveBeenCalledWith(
-        'mkdir', ['-p', 'chromeos-webdriver-scripts'], expect.any(Object));
+        'mkdir', ['-p', DESTINATION_FOLDER], expect.any(Object));
   });
 
   it('transfers all helper scripts to the device', async () => {
@@ -171,14 +173,11 @@ describe('connectAndPrepDevice()', () => {
     const transfers = mockSshInstance.putFiles.mock.calls[0][0];
     const remoteFiles = transfers.map((t) => t.remote);
 
+    expect(remoteFiles).toContain(`${DESTINATION_FOLDER}/launch_page.sh`);
+    expect(remoteFiles).toContain(`${DESTINATION_FOLDER}/show_login_screen.sh`);
     expect(remoteFiles).toContain(
-        'chromeos-webdriver-scripts/launch_page.sh');
-    expect(remoteFiles).toContain(
-        'chromeos-webdriver-scripts/show_login_screen.sh');
-    expect(remoteFiles).toContain(
-        'chromeos-webdriver-scripts/auto_login_chrome_wrapper.sh');
-    expect(remoteFiles).toContain(
-        'chromeos-webdriver-scripts/shut_down_sessions.sh');
+        `${DESTINATION_FOLDER}/auto_login_chrome_wrapper.sh`);
+    expect(remoteFiles).toContain(`${DESTINATION_FOLDER}/shut_down_sessions.sh`);
   });
 
   it('makes the scripts executable on the device', async () => {

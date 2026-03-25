@@ -26,7 +26,7 @@ const tmp = require('tmp-promise');
 const fs = require('fs');
 const os = require('os');
 
-const {loadOnTizen} = require('../tizen-utils');
+const {dockerImageAppTemplatePath, loadOnTizen} = require('../tizen-utils');
 
 const log = {
   info: jest.fn(),
@@ -183,7 +183,7 @@ describe('loadOnTizen()', () => {
       const volumeIndex = dockerArgs.indexOf('-v');
       expect(volumeIndex).toBeGreaterThan(-1);
       // The volume mount should include /tmp/app-template as the target.
-      expect(dockerArgs[volumeIndex + 1]).toContain('/tmp/app-template');
+      expect(dockerArgs[volumeIndex + 1]).toContain(dockerImageAppTemplatePath);
     });
 
     it('removes the container after exit (--rm flag)', async () => {

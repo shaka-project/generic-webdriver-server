@@ -414,6 +414,7 @@ function addXboxOneArgs(yargs) {
 }
 
 module.exports = {
+  ERROR_INSTALL_REGISTRATION_FAILURE,
   checkPlatformRequirements,
   loadOnXboxOne,
   takeScreenshot,
