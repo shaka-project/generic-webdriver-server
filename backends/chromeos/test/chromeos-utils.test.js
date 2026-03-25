@@ -92,13 +92,14 @@ describe('fetchPrivateKey()', () => {
   });
 
   it('creates the .ssh folder if it does not exist', async () => {
-    // First call: key file check (false), second call: folder check (false).
-    fs.existsSync
-        .mockReturnValueOnce(false)  // key file
-        .mockReturnValueOnce(false); // key folder
+    const flags = {...defaultFlags, fetchPrivateKey: true};
+    fs.existsSync.mockImplementation((p) => {
+      if (p === flags.privateKey) return false;          // key file absent
+      if (p === path.dirname(flags.privateKey)) return false;  // folder absent
+      return false;
+    });
     nodeFetch.mockResolvedValue({text: async () => 'data'});
 
-    const flags = {...defaultFlags, fetchPrivateKey: true};
     await fetchPrivateKey(flags, log);
 
     expect(fs.mkdirSync).toHaveBeenCalledWith(
@@ -107,13 +108,14 @@ describe('fetchPrivateKey()', () => {
   });
 
   it('skips folder creation if the folder already exists', async () => {
-    // First call: key file check (false), second call: folder check (true).
-    fs.existsSync
-        .mockReturnValueOnce(false)  // key file
-        .mockReturnValueOnce(true);  // key folder
+    const flags = {...defaultFlags, fetchPrivateKey: true};
+    fs.existsSync.mockImplementation((p) => {
+      if (p === flags.privateKey) return false;         // key file absent
+      if (p === path.dirname(flags.privateKey)) return true;  // folder present
+      return false;
+    });
     nodeFetch.mockResolvedValue({text: async () => 'data'});
 
-    const flags = {...defaultFlags, fetchPrivateKey: true};
     await fetchPrivateKey(flags, log);
 
     expect(fs.mkdirSync).not.toHaveBeenCalled();
