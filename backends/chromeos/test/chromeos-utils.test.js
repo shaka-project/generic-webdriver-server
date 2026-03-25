@@ -224,8 +224,7 @@ describe('loadOnChromeOS()', () => {
 
     const execArgs = mockSsh.exec.mock.calls[0][1];
     expect(execArgs).toContain('--kiosk');
-    expect(execArgs.some((a) => a.startsWith('--app='))).toBe(true);
-    expect(execArgs.some((a) => a.includes('http://example.com'))).toBe(true);
+    expect(execArgs).toContain(`--app=http://example.com`);
   });
 
   it('includes extra chromeArgs when provided', async () => {
