@@ -305,7 +305,9 @@ describe('loadOnXboxOne()', () => {
           launchAttempts++;
           if (launchAttempts === 1) {
             statusCode = 500;
-            body = JSON.stringify({ErrorCode: ERROR_INSTALL_REGISTRATION_FAILURE});
+            body = JSON.stringify({
+              ErrorCode: ERROR_INSTALL_REGISTRATION_FAILURE,
+            });
           }
         }
 
