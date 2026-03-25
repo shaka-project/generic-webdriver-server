@@ -26,6 +26,7 @@ const path = require('path');
 const {
   DEFAULT_SSH_PORT,
   DESTINATION_FOLDER,
+  SCRIPTS,
   fetchPrivateKey,
   connectAndPrepDevice,
   loadOnChromeOS,
@@ -181,12 +182,9 @@ describe('connectAndPrepDevice()', () => {
     const transfers = mockSshInstance.putFiles.mock.calls[0][0];
     const remoteFiles = transfers.map((t) => t.remote);
 
-    expect(remoteFiles).toContain(`${DESTINATION_FOLDER}/launch_page.sh`);
-    expect(remoteFiles).toContain(`${DESTINATION_FOLDER}/show_login_screen.sh`);
-    expect(remoteFiles).toContain(
-        `${DESTINATION_FOLDER}/auto_login_chrome_wrapper.sh`);
-    expect(remoteFiles).toContain(
-        `${DESTINATION_FOLDER}/shut_down_sessions.sh`);
+    for (const fileName of SCRIPTS) {
+      expect(remoteFiles).toContain(`${DESTINATION_FOLDER}/${fileName}`);
+    }
   });
 
   it('makes the scripts executable on the device', async () => {

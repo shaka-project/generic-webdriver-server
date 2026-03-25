@@ -271,6 +271,7 @@ function addChromeOSArgs(yargs) {
 module.exports = {
   DEFAULT_SSH_PORT,
   DESTINATION_FOLDER,
+  SCRIPTS,
   fetchPrivateKey,
   connectAndPrepDevice,
   loadOnChromeOS,
