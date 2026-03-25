@@ -8,7 +8,32 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.ref }}
+          persist-credentials: false
+
+      - name: Setup Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Lint all packages
+        run: |
+          for i in base backends/*; do
+            (cd "$i" && npm lint)
+          done
+
+  test:
     name: ${{ matrix.os }}, Node.js ${{ matrix.node-version }}
     runs-on: ${{ matrix.os }}
 
@@ -20,6 +45,7 @@ jobs:
       fail-fast: false
 
     steps:
+      # Keep LF on Windows.  Don't translate to CRLF on checkout.
       - name: Configure git
         run: git config --global core.autocrlf false
 
