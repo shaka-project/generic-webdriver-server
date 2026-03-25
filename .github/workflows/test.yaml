@@ -8,6 +8,33 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.ref }}
+          persist-credentials: false
+
+      - name: Setup Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Lint all packages
+        run: |
+          result=0
+          for i in base backends/*; do
+            (cd "$i" && npm run lint) || result=$?
+          done
+          exit $result
+
   test:
     name: ${{ matrix.os }}, Node.js ${{ matrix.node-version }}
     runs-on: ${{ matrix.os }}
@@ -51,6 +78,8 @@ jobs:
       - name: Test all packages
         shell: bash
         run: |
+          result=0
           for i in base backends/*; do
-            (cd "$i" && npm test)
+            (cd "$i" && npm test) || result=$?
           done
+          exit $result

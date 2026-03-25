@@ -30,8 +30,7 @@ const dockerImageAppTemplatePath = '/tmp/app-template';
 /**
  * Uses Tizen Studio to connect to a Tizen device, install a temporary container
  * app, and load a URL into it.
- *
- * @param {!object<string, ?>} flags Parsed command-line flags.
+ * @param {!Object<string, ?>} flags Parsed command-line flags.
  * @param {Console} log A Console-like interface for logging.  Can be "console".
  * @param {?string} url If non-null, install the Tizen container app and load
  *   the URL into it.  If null, send the Tizen device back to the home screen.
@@ -43,7 +42,6 @@ async function loadOnTizen(flags, log, url) {
    * For locally-installed copies of Tizen Studio, these will be executed in
    * bash directly.  When using a Docker image (the default), these will be
    * executed inside Docker.
-   *
    * @type {!Array<string>}
    */
   let commands = [];
@@ -168,7 +166,6 @@ async function loadOnTizen(flags, log, url) {
 /**
  * Add Tizen-specific arguments to the application's argument parser (from the
  * "yargs" module).
- *
  * @param {Yargs} yargs The argument parser object from "yargs".
  */
 function addTizenArgs(yargs) {
