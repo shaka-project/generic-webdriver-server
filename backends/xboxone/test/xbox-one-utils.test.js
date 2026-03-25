@@ -196,7 +196,7 @@ describe('loadOnXboxOne()', () => {
 
       expect(fs.writeFileSync).toHaveBeenCalledWith(
           expect.any(String),
-          expect.stringContaining('http://example.com'));
+          '<WebView Source="http://example.com" />');
     });
 
     it('runs MSBuild with the correct solution and flags', async () => {
