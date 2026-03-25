@@ -36,15 +36,11 @@ const tmp = require('tmp-promise');
 const os = require('os');
 const https = require('https');
 
-// We test individual exported functions; loadOnXboxOne orchestrates the rest.
 const {
   ERROR_INSTALL_REGISTRATION_FAILURE,
   checkPlatformRequirements,
   takeScreenshot,
 } = require('../xbox-one-utils');
-
-// Also need setAppUrl and buildApp, which are not exported.
-// We test them indirectly through loadOnXboxOne, or test their effects.
 
 const log = {
   info: jest.fn(),
