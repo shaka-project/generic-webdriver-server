@@ -18,7 +18,12 @@
 jest.mock('castv2');
 
 const castv2 = require('castv2');
-const {cast, Mode} = require('../cast-utils');
+const {
+  DEFAULT_CONNECTION_TIMEOUT_SECONDS,
+  HOME_SCREEN_APP_ID,
+  Mode,
+  cast,
+} = require('../cast-utils');
 
 // Silence log output during tests.
 const log = {
@@ -27,15 +32,16 @@ const log = {
   error: jest.fn(),
 };
 
+const TEST_RECEIVER_APP_ID = '29993EC8';
+const TIMEOUT_DELAY_MS =
+  (DEFAULT_CONNECTION_TIMEOUT_SECONDS + 1) * 1000;
+
 const defaultFlags = {
   hostname: '192.168.1.100',
-  receiverAppId: '29993EC8',
+  receiverAppId: TEST_RECEIVER_APP_ID,
   redirect: false,
   connectionTimeoutSeconds: 30,
 };
-
-// The home screen app ID hard-coded in cast-utils.js.
-const HOME_SCREEN_APP_ID = 'E8C28D3C';
 
 describe('cast()', () => {
   let mockClient;
@@ -97,7 +103,7 @@ describe('cast()', () => {
       const sendCalls = mockChannel.send.mock.calls;
       const launchRequest = sendCalls.find((c) => c[0].type === 'LAUNCH');
       expect(launchRequest).toBeDefined();
-      expect(launchRequest[0].appId).toBe('29993EC8');
+      expect(launchRequest[0].appId).toBe(TEST_RECEIVER_APP_ID);
     });
 
     it('includes the URL in commandParameters', () => {
@@ -115,7 +121,7 @@ describe('cast()', () => {
 
       messageHandler({
         type: 'RECEIVER_STATUS',
-        status: {applications: [{appId: '29993EC8'}]},
+        status: {applications: [{appId: TEST_RECEIVER_APP_ID}]},
       });
 
       await expect(castPromise).resolves.toBeUndefined();
@@ -133,7 +139,7 @@ describe('cast()', () => {
       });
 
       // Advance time to trigger timeout so the promise can settle.
-      jest.advanceTimersByTime(31000);
+      jest.advanceTimersByTime(TIMEOUT_DELAY_MS);
 
       await expect(castPromise).rejects.toThrow('Timeout');
     });
@@ -201,7 +207,7 @@ describe('cast()', () => {
     it('rejects with timeout error when no response arrives', async () => {
       const castPromise = cast(defaultFlags, log, Mode.URL, 'http://example.com');
 
-      jest.advanceTimersByTime(30001);
+      jest.advanceTimersByTime(TIMEOUT_DELAY_MS);
 
       await expect(castPromise).rejects.toThrow(
           'Timeout waiting for Chromecast to load!');
