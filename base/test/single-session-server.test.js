@@ -14,9 +14,16 @@
  * limitations under the License.
  */
 
+const IDLE_TIMEOUT_SECONDS = 10;
+const TIMEOUT_DELAY_MS = (IDLE_TIMEOUT_SECONDS + 1) * 1000;
+const ALMOST_TIMEOUT_DELAY_MS = (IDLE_TIMEOUT_SECONDS - 1) * 1000;
+
 // Set argv before any require so yargs.argv parses clean args.
-process.argv = ['node', 'test', '--port', '4444',
-  '--idle-timeout-seconds', '10'];
+process.argv = [
+  'node', 'test',
+  '--port', '4444',
+  '--idle-timeout-seconds', IDLE_TIMEOUT_SECONDS.toString(),
+];
 
 const request = require('supertest');
 
@@ -51,8 +58,6 @@ describe('GenericSingleSessionWebDriverServer', () => {
   let app;
 
   beforeEach(() => {
-    process.argv = ['node', 'test', '--port', '4444',
-      '--idle-timeout-seconds', '10'];
     jest.useFakeTimers();
     server = new TestSingleSessionServer();
     server.log = {
@@ -191,8 +196,8 @@ describe('GenericSingleSessionWebDriverServer', () => {
     it('closes the session after idle timeout elapses', async () => {
       await request(app).post('/session').send({});
 
-      // Advance time past the 10-second idle timeout.
-      jest.advanceTimersByTime(10001);
+      // Advance time past the idle timeout.
+      jest.advanceTimersByTime(TIMEOUT_DELAY_MS);
 
       // Allow microtasks (closeSession is async) to run.
       await Promise.resolve();
@@ -205,8 +210,8 @@ describe('GenericSingleSessionWebDriverServer', () => {
       const sess = await request(app).post('/session').send({});
       const id = sess.body.value.sessionId;
 
-      // Advance 8 seconds.
-      jest.advanceTimersByTime(8000);
+      // Advance without timeout.
+      jest.advanceTimersByTime(ALMOST_TIMEOUT_DELAY_MS);
       await Promise.resolve();
 
       // Navigate to reset the timer.
@@ -214,8 +219,9 @@ describe('GenericSingleSessionWebDriverServer', () => {
           .post(`/session/${id}/url`)
           .send({url: 'http://example.com'});
 
-      // Advance another 8 seconds (total 16s, but timer was reset at 8s).
-      jest.advanceTimersByTime(8000);
+      // Advance again.  (More than enough total to timeout, but time was reset
+      // after navigation.)
+      jest.advanceTimersByTime(ALMOST_TIMEOUT_DELAY_MS);
       await Promise.resolve();
 
       // Session should still be active.
@@ -230,7 +236,7 @@ describe('GenericSingleSessionWebDriverServer', () => {
       await request(app).delete(`/session/${id}`);
 
       // Advance time past what the timeout would have been.
-      jest.advanceTimersByTime(15000);
+      jest.advanceTimersByTime(TIMEOUT_DELAY_MS);
       await Promise.resolve();
 
       // closeSingleSession: called once by explicit close, not by timeout.
