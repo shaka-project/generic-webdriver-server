@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-// Mock castv2 before any require so the module gets the mock.
 jest.mock('castv2');
 
 const castv2 = require('castv2');
