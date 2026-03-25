@@ -140,7 +140,10 @@ describe('connectAndPrepDevice()', () => {
     await connectAndPrepDevice(defaultFlags, log);
 
     expect(mockSshInstance.connect).toHaveBeenCalledWith(
-        expect.objectContaining({host: '192.168.1.50', port: DEFAULT_SSH_PORT}));
+        expect.objectContaining({
+          host: '192.168.1.50',
+          port: DEFAULT_SSH_PORT,
+        }));
   });
 
   it('uses explicit port when specified in hostname', async () => {
@@ -148,7 +151,10 @@ describe('connectAndPrepDevice()', () => {
     await connectAndPrepDevice(flags, log);
 
     expect(mockSshInstance.connect).toHaveBeenCalledWith(
-        expect.objectContaining({host: '192.168.1.50', port: 2222}));
+        expect.objectContaining({
+          host: '192.168.1.50',
+          port: 2222,
+        }));
   });
 
   it('uses the correct username and private key path', async () => {
@@ -179,7 +185,8 @@ describe('connectAndPrepDevice()', () => {
     expect(remoteFiles).toContain(`${DESTINATION_FOLDER}/show_login_screen.sh`);
     expect(remoteFiles).toContain(
         `${DESTINATION_FOLDER}/auto_login_chrome_wrapper.sh`);
-    expect(remoteFiles).toContain(`${DESTINATION_FOLDER}/shut_down_sessions.sh`);
+    expect(remoteFiles).toContain(
+        `${DESTINATION_FOLDER}/shut_down_sessions.sh`);
   });
 
   it('makes the scripts executable on the device', async () => {
