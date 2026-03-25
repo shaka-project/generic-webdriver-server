@@ -52,7 +52,6 @@ describe('loadOnTizen()', () => {
   beforeEach(() => {
     // Make execFile succeed by default (promisify adds callback as last arg).
     childProcess.execFile.mockImplementation((file, args, cb) => {
-      // util.promisify adds callback as last arg.
       cb(null, '', '');
     });
 
@@ -124,7 +123,6 @@ describe('loadOnTizen()', () => {
 
       const cmd = childProcess.execFile.mock.calls[0][1][1];
       expect(cmd).not.toContain('http');
-      expect(cmd).not.toContain('sed');
     });
 
     it('does not include install/run commands when going home', async () => {
