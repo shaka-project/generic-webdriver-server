@@ -229,6 +229,7 @@ function addTizenArgs(yargs) {
 }
 
 module.exports = {
+  dockerImageAppTemplatePath,
   loadOnTizen,
   addTizenArgs,
 };

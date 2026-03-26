@@ -20,7 +20,14 @@
   "main": "chromecast-webdriver-server.js",
   "scripts": {
     "lint": "eslint --ignore-path ../../.gitignore --max-warnings 0 .",
-    "test": "npm run lint"
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "verbose": true
   },
   "bin": {
     "chromecast-webdriver-cli": "./chromecast-webdriver-cli.js",
@@ -30,8 +37,5 @@
     "castv2": "^0.1.10",
     "generic-webdriver-server": "^1.1.5",
     "yargs": "^17.7.2"
-  },
-  "workspaces": [
-    "../../base"
-  ]
+  }
 }

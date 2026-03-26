@@ -20,7 +20,7 @@
   "scripts": {
     "lint": "eslint --ignore-path ../.gitignore --max-warnings 0 .",
     "jar": "ant -f java/build.xml jar && cp java/build/jar/*.jar java/third_party/selenium*.jar ./",
-    "test": "npm run lint",
+    "test": "jest",
     "prepack": "cp ../*.md . && npm run jar"
   },
   "dependencies": {
@@ -28,6 +28,12 @@
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "eslint": "^8.11.0"
+    "eslint": "^8.11.0",
+    "jest": "^29.7.0",
+    "supertest": "^6.3.4"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "verbose": true
   }
 }

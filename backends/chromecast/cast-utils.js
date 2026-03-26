@@ -23,6 +23,8 @@ const SERIAL_NUMBER_APP_ID = '39B1F81E';
 // Makes it more obvious why we multiply timeouts by 1000 for setTimeout.
 const MILLISECONDS_PER_SECOND = 1000;
 
+const DEFAULT_CONNECTION_TIMEOUT_SECONDS = 30;
+
 const Mode = {
   HOME: 0,
   URL: 1,
@@ -196,12 +198,14 @@ function addChromecastArgs(yargs) {
       .option('connection-timeout-seconds', {
         description: 'A timeout for the Chromecast connection',
         type: 'number',
-        default: 30,
+        default: DEFAULT_CONNECTION_TIMEOUT_SECONDS,
       });
 }
 
 module.exports = {
+  DEFAULT_CONNECTION_TIMEOUT_SECONDS,
+  HOME_SCREEN_APP_ID,
   Mode,
-  cast,
   addChromecastArgs,
+  cast,
 };

@@ -2,11 +2,15 @@
   "name": "root-eslint-config",
   "description": "Fake package to make project-wide eslint config work.  If we don't place the eslint-config-google dependency here, eslint will fail to find it.  Not published.",
   "private": true,
+  "workspaces": [
+    "base",
+    "backends/*"
+  ],
   "devDependencies": {
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-jsdoc": "^38.0.6"
   },
   "scripts": {
-    "test": "for i in base backends/*; do npm --prefix $i test; done"
+    "test": "for i in base backends/*; do (cd $i && npm test); done"
   }
 }

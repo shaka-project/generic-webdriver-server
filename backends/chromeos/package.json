@@ -21,7 +21,14 @@
   "main": "chromeos-webdriver-server.js",
   "scripts": {
     "lint": "eslint --ignore-path ../../.gitignore --max-warnings 0 .",
-    "test": "npm run lint"
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "verbose": true
   },
   "bin": {
     "chromeos-webdriver-cli": "./chromeos-webdriver-cli.js",
@@ -32,8 +39,5 @@
     "node-fetch": "^2.7.0",
     "node-ssh": "^13.2.0",
     "yargs": "^17.7.2"
-  },
-  "workspaces": [
-    "../../base"
-  ]
+  }
 }
