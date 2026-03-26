@@ -45,8 +45,7 @@ const SCRIPTS = [
 
 /**
  * Fetch the private key for the ChromeOS device based on the flags.
- *
- * @param {!object<string, ?>} flags Parsed command-line flags.
+ * @param {!Object<string, ?>} flags Parsed command-line flags.
  * @param {Console} log A Console-like interface for logging.  Can be "console".
  * @return {!Promise}
  */
@@ -87,8 +86,7 @@ async function fetchPrivateKey(flags, log) {
  * necessary scripts.
  *
  * Use fetchPrivateKey first.
- *
- * @param {!object<string, ?>} flags Parsed command-line flags.
+ * @param {!Object<string, ?>} flags Parsed command-line flags.
  * @param {Console} log A Console-like interface for logging.  Can be "console".
  * @return {!Promise<!NodeSSH>} An open SSH connection from the node-ssh module.
  */
@@ -145,7 +143,6 @@ async function connectAndPrepDevice(flags, log) {
 /**
  * Uses an SSH connection to a dev-mode-enabled ChromeOS device to launch Chrome
  * with a specific URL and command-line arguments.
- *
  * @param {Console} log A Console-like interface for logging.  Can be "console".
  * @param {!NodeSSH} ssh An open SSH connection from the node-ssh module.
  * @param {?string} url If non-null, launch Chrome to view the specified URL.
@@ -180,7 +177,6 @@ async function loadOnChromeOS(log, ssh, url, chromeArgs) {
 /**
  * Uses an SSH connection to a dev-mode-enabled ChromeOS device to shut down any
  * existing session and show the login screen.
- *
  * @param {Console} log A Console-like interface for logging.  Can be "console".
  * @param {!NodeSSH} ssh An open SSH connection from the node-ssh module.
  */
@@ -192,7 +188,6 @@ async function loadChromeOSLoginScreen(log, ssh) {
 
 /**
  * Execute a remote command on the ChromeOS device.
- *
  * @param {Console} log A Console-like interface for logging.  Can be "console".
  * @param {!NodeSSH} ssh An open SSH connection from the node-ssh module.
  * @param {!Array<string>} argv The command line to execute
@@ -226,7 +221,6 @@ async function executeRemoteCommand(log, ssh, argv) {
 /**
  * Add ChromeOS-specific arguments to the application's argument parser (from
  * the "yargs" module).
- *
  * @param {Yargs} yargs The argument parser object from "yargs".
  */
 function addChromeOSArgs(yargs) {

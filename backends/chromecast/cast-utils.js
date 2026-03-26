@@ -35,8 +35,7 @@ const Mode = {
  * Uses the Cast v2 protocol to connect to a Chromecast device and start a
  * receiver app or close the running app and go back to the Chromecast home
  * screen.
- *
- * @param {!object<string, ?>} flags Parsed command-line flags.
+ * @param {!Object<string, ?>} flags Parsed command-line flags.
  * @param {Console} log A Console-like interface for logging.  Can be "console".
  * @param {Mode} mode A Mode constant, such as Mode.HOME or Mode.URL.
  * @param {?string} url Required for Mode.URL, ignored otherwise.
@@ -171,7 +170,6 @@ function cast(flags, log, mode, url) {
 /**
  * Add Chromecast-specific arguments to the application's argument parser (from
  * the "yargs" module).
- *
  * @param {Yargs} yargs The argument parser object from "yargs".
  */
 function addChromecastArgs(yargs) {

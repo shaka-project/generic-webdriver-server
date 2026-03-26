@@ -53,8 +53,7 @@ const ERROR_INSTALL_REGISTRATION_FAILURE = -2147009290;
 /**
  * Uses Visual Studio to connect to an Xbox One device, install a temporary UWP
  * container app, and load a URL into it.
- *
- * @param {!object<string, ?>} flags Parsed command-line flags.
+ * @param {!Object<string, ?>} flags Parsed command-line flags.
  * @param {Console} log A Console-like interface for logging.  Can be "console".
  * @param {?string} url If non-null, install the Xbox One container app and load
  *   the URL into it.  If null, send the Xbox One device back to the home
@@ -97,8 +96,7 @@ async function loadOnXboxOne(flags, log, url) {
 
 /**
  * Check platform requirements for using these tools.
- *
- * @throws Error if requirements are not met.
+ * @throws {Error} if requirements are not met.
  */
 function checkPlatformRequirements() {
   if (!os.type().toLowerCase().startsWith('windows')) {
@@ -108,7 +106,6 @@ function checkPlatformRequirements() {
 
 /**
  * Set the URL for the application template.
- *
  * @param {string} tempPath The temp folder in which the application template
  *   can be found.
  * @param {string} url The destination URL.
@@ -123,7 +120,6 @@ function setAppUrl(tempPath, url) {
 
 /**
  * Build the application in the temp path.
- *
  * @param {string} msbuildPath The path to MSBuild.exe.
  * @param {string} tempPath The temp folder in which the application template
  *   can be found.
@@ -143,7 +139,6 @@ async function buildApp(msbuildPath, tempPath) {
 
 /**
  * Install the application to the specified Xbox One.
- *
  * @param {string} tempPath The temp folder in which the application template
  *   can be found.
  * @param {string} xboxOneAddress The IP or hostname of the Xbox One device.
@@ -196,7 +191,6 @@ async function installApp(tempPath, xboxOneAddress, username, password) {
 
 /**
  * Launch the application on the specified Xbox One.
- *
  * @param {Console} log A Console-like interface for logging.  Can be "console".
  * @param {string} xboxOneAddress The IP or hostname of the Xbox One device.
  * @param {string} username The username to authenticate to the Device Portal.
@@ -240,7 +234,6 @@ async function launchApp(log, xboxOneAddress, username, password) {
 
 /**
  * Uninstall the application on the specified Xbox One.
- *
  * @param {string} xboxOneAddress The IP or hostname of the Xbox One device.
  * @param {string} username The username to authenticate to the Device Portal.
  * @param {string} password The password to authenticate to the Device Portal.
@@ -263,7 +256,6 @@ async function uninstallApp(xboxOneAddress, username, password) {
 
 /**
  * Take a screenshot on the specified Xbox One (PNG format).
- *
  * @param {string} xboxOneAddress The IP or hostname of the Xbox One device.
  * @param {string} username The username to authenticate to the Device Portal.
  * @param {string} password The password to authenticate to the Device Portal.
@@ -281,7 +273,6 @@ async function takeScreenshot(xboxOneAddress, username, password) {
 /**
  * A helper function to make HTTP requests to the Device Portal APIs on the Xbox
  * One device.
- *
  * @param {string} xboxOneAddress The IP or hostname of the Xbox One device.
  * @param {string} username The username to authenticate to the Device Portal.
  * @param {string} password The password to authenticate to the Device Portal.
@@ -346,7 +337,6 @@ function httpRequestHelper(
 
 /**
  * Delay for a fixed number of seconds.
- *
  * @param {number} seconds The amount of time to delay
  * @return {!Promise}
  */
@@ -356,7 +346,6 @@ function delay(seconds) {
 
 /**
  * Try to find MSBuild.exe from Visual Studio, to simplify configuration.
- *
  * @return {?string} The path to MSBuild.exe, or null if not found.
  */
 function findMsbuild() {
@@ -379,7 +368,6 @@ function findMsbuild() {
 /**
  * Add Xbox-One-specific arguments to the application's argument parser (from
  * the "yargs" module).
- *
  * @param {Yargs} yargs The argument parser object from "yargs".
  */
 function addXboxOneArgs(yargs) {

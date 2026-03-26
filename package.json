@@ -8,9 +8,11 @@
   ],
   "devDependencies": {
     "eslint-config-google": "^0.14.0",
-    "eslint-plugin-jsdoc": "^38.0.6"
+    "eslint-plugin-jsdoc": "^62.8.0"
   },
   "scripts": {
-    "test": "for i in base backends/*; do (cd $i && npm test); done"
+    "lint": "result=0; for i in base backends/*; do (cd $i && npm run lint) || result=$?; done; exit $result",
+    "lint-fix": "for i in base backends/*; do (cd $i && npm run lint -- --fix); done",
+    "test": "result=0; for i in base backends/*; do (cd $i && npm test) || result=$?; done; exit $result"
   }
 }

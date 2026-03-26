@@ -171,8 +171,7 @@ class GenericWebDriverServer {
   constructor() {
     /**
      * Parsed command-line flags.
-     *
-     * @type {!object<string, ?>}
+     * @type {!Object<string, ?>}
      */
     this.flags = yargs.argv;
 
@@ -191,7 +190,6 @@ class GenericWebDriverServer {
 
   /**
    * Initialize the logging system and this.log.
-   *
    * @private
    */
   initLogging_() {
@@ -214,7 +212,6 @@ class GenericWebDriverServer {
 
   /**
    * Initialize the WebDriver protocol handlers using express.
-   *
    * @private
    */
   initWebDriverProtocol_() {
@@ -238,7 +235,6 @@ class GenericWebDriverServer {
      * the structure detailed in W3C WebDriver protocol spec and formatted in
      * JSON.  Thrown errors are also handled and converted into
      * correctly-formatted errors responses in JSON.
-     *
      * @param {function(object, object):!Promise<!GenericWebDriverResponse>} fn
      *   The callback which will handle the request.  Takes URL parameters and
      *   JSON parameters from the POST body.
@@ -366,7 +362,6 @@ class GenericWebDriverServer {
   /**
    * Check if the server is ready and can create a session.
    * Overridden by a subclass.
-   *
    * @return {!Promise<boolean>} True if the system is ready and can create a
    *   session.  If concurrent sessions are not supported, this should return
    *   false while a session is in use.
@@ -378,7 +373,6 @@ class GenericWebDriverServer {
   /**
    * Shut down the server after closing any open sessions.
    * Overridden by a subclass.  Optional.
-   *
    * @return {!Promise}
    */
   async shutdown() {}
@@ -386,7 +380,6 @@ class GenericWebDriverServer {
   /**
    * Create a new session.
    * Overridden by a subclass.
-   *
    * @return {!Promise<?string>} The session ID, which must be non-null and
    *   non-empty.  A null or empty value will be converted into an error.
    */
@@ -397,7 +390,6 @@ class GenericWebDriverServer {
   /**
    * Navigate to a specific URL in a specific session.
    * Overridden by a subclass.
-   *
    * @param {string} sessionId The ID of the session.
    * @param {string} url The URL to navigate to.
    * @return {!Promise}
@@ -410,7 +402,6 @@ class GenericWebDriverServer {
   /**
    * Take a full-page screenshot of the browsing window of a specific session.
    * Overridden by a subclass.  Optional.
-   *
    * @param {string} sessionId The ID of the session.
    * @return {!Promise<Buffer>} A PNG screenshot.
    * @throws {InvalidSessionIdError} on invalid session
@@ -424,7 +415,6 @@ class GenericWebDriverServer {
    * Get the page title for the session ID. This is sometimes used as a ping to
    * keep the connection alive, and does not have to be accurate.
    * Overridden by a subclass.
-   *
    * @param {string} sessionId The ID of the session.
    * @return {!Promise<string>}
    * @throws {InvalidSessionIdError} on invalid session
@@ -436,7 +426,6 @@ class GenericWebDriverServer {
   /**
    * Close a specific session.  Does not throw on an unknown session ID.
    * Overridden by a subclass.
-   *
    * @param {string} sessionId The ID of the session.
    * @return {!Promise}
    */
@@ -557,7 +546,6 @@ class GenericSingleSessionWebDriverServer extends GenericWebDriverServer {
   /**
    * Shut down the server after closing the session.
    * Overridden by a subclass.  Optional.
-   *
    * @return {!Promise}
    */
   async shutdownSingleSession() {}
@@ -565,7 +553,6 @@ class GenericSingleSessionWebDriverServer extends GenericWebDriverServer {
   /**
    * Navigate to a specific URL.
    * Overridden by a subclass.
-   *
    * @param {string} url The URL to navigate to.
    * @return {!Promise}
    */
@@ -576,7 +563,6 @@ class GenericSingleSessionWebDriverServer extends GenericWebDriverServer {
   /**
    * Close the session.
    * Overridden by a subclass.
-   *
    * @return {!Promise}
    */
   async closeSingleSession() {
