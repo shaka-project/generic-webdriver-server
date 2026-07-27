@@ -24,7 +24,7 @@
     "prepack": "cp ../*.md . && npm run jar"
   },
   "dependencies": {
-    "express": "^4.22.2",
+    "express": "^5.2.1",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
